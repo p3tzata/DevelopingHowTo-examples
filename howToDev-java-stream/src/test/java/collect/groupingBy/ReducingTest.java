@@ -29,19 +29,19 @@ public class ReducingTest {
 
     return Collectors.reducing(
         new Stock(null, 0, null),
-        (g1, g2) -> {
+        (x1, x2) -> {
 
-          if (g1.getArticleNo() == null) {
-            return g2;
+          if (x1.getArticleNo() == null) {
+            return x2;
           }
 
-          if (g2.getArticleNo() == null) {
-            return g1;
+          if (x2.getArticleNo() == null) {
+            return x1;
           }
 
-          g1.setQtty(g1.getQtty() + g2.getQtty());
+          x1.setQtty(x1.getQtty() + x2.getQtty());
 
-          return g1;
+          return x1;
         });
   }
 

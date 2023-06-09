@@ -4,7 +4,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import org.junit.jupiter.api.Test;
 
-public class WithZoneSameInstantTest {
+public class ZoneDateTimeTest {
 
    @Test
    void withZoneSameInstant(){

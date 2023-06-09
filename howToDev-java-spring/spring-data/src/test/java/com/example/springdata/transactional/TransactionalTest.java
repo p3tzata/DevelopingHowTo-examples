@@ -1,24 +1,36 @@
 package com.example.springdata.transactional;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
 import com.example.springdata.entity.OrderEntity;
 import com.example.springdata.repository.OrderRepository;
-import com.example.springdata.service.OrderService;
+import com.example.springdata.service.transactional.OrderService;
 import java.sql.SQLException;
-import org.junit.jupiter.api.Test;
+import org.h2.tools.Server;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.h2.tools.Server;
+import org.springframework.transaction.UnexpectedRollbackException;
 
 @SpringBootTest
 public class TransactionalTest {
-
   @Autowired
   OrderRepository orderRepository;
 
   @Autowired
   OrderService orderService;
 
+  private OrderEntity orderEntity = OrderEntity.builder()
+      .id(1L)
+      .orderCode("test")
+      .build();
+  @AfterEach
+  public void dearDown(){
+    orderRepository.deleteAll();
+  }
   @BeforeEach
   public void setUpH2Console() throws SQLException {
     /**
@@ -37,116 +49,31 @@ public class TransactionalTest {
         .start();
   }
 
+
   @Test
-  void getTransactionalId() {
+  void InTransaction_save_orderService2saveWithNewTransactionThrowError() {
 
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-
-    orderService.saveWithOutTransactional(orderEntity);
+    assertDoesNotThrow(() ->orderService.InTransaction_save_orderService2saveWithNewTransactionThrowError(orderEntity));
 
     String debug = "debug";
 
   }
 
   @Test
-  void getTransactionalId_2() {
+  void InTransaction_save_orderService2saveWithTransactionThrowError() {
 
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-
-    orderService.saveWithTransactional(orderEntity);
-
-    String debug = "debug";
-
-  }
-
-
-  @Test
-  void getTransactionalId_3() {
-
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-
-    orderService.passToService2(orderEntity);
+    assertThrowsExactly(UnexpectedRollbackException.class,
+        () -> orderService.InTransaction_save_orderService2saveWithTransactionThrowError(orderEntity));
 
     String debug = "debug";
 
   }
 
   @Test
-  void getTransactionalId_4() {
-
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-
-    orderService.passToService2_newTransaction(orderEntity);
+  void NoTransaction_save_orderService2saveWithTransactionThrowError(){
+    assertDoesNotThrow(() ->orderService.NoTransaction_save_orderService2saveWithTransactionThrowError(orderEntity));
 
     String debug = "debug";
-
   }
-
-  @Test
-  void getTransactionalId_5() {
-
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-    try {
-      orderService.passToService2_newTransactionThrowError(orderEntity);
-
-    } catch (Exception ex) {
-      String message = ex.getMessage();
-    }
-
-    String debug = "debug";
-
-  }
-
-  @Test
-  void getTransactionalId_6() {
-
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-    try {
-      orderService.saveAndPassToService2(orderEntity);
-    } catch (Exception ex) {
-      String message = ex.getMessage();
-    }
-
-    String debug = "debug";
-
-  }
-
-  @Test
-  void getTransactionalId_7() {
-
-    OrderEntity orderEntity = OrderEntity.builder()
-        .id(1L)
-        .orderCode("test")
-        .build();
-    try {
-      orderService.saveAndPassToService2WithNewTransaction(orderEntity);
-    } catch (Exception ex) {
-      String message = ex.getMessage();
-    }
-
-    String debug = "debug";
-
-  }
-
-
-
 
 }

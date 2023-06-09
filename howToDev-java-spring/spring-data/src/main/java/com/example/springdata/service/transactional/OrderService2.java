@@ -1,5 +1,6 @@
-package com.example.springdata.service;
+package com.example.springdata.service.transactional;
 
+import com.example.springdata.exception.SomeException;
 import com.example.springdata.entity.OrderEntity;
 import com.example.springdata.repository.OrderRepository;
 import javax.transaction.Transactional;
@@ -7,10 +8,6 @@ import javax.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Service
@@ -42,7 +39,7 @@ public class OrderService2 {
 
     String debug = "debug";
     if (true==true) {
-      throw new RuntimeException("Error from saveWithTransactionThrowError");
+      throw new SomeException("Error from saveWithTransactionThrowError");
     }
 
     return orderRepository.saveAndFlush(orderEntity);
@@ -68,7 +65,7 @@ public class OrderService2 {
 
     String debug = "debug";
     if (true==true) {
-      throw new RuntimeException("Error from saveWithTransactionThrowError");
+      throw new SomeException("Some exception message");
     }
 
     return orderRepository.saveAndFlush(orderEntity);

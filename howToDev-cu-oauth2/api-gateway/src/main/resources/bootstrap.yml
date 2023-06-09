@@ -1,0 +1,6 @@
+#//#cu_bootstrap
+# these properties are got before application.yml
+
+spring:
+  application:
+    name: api-gateway

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders</title>
+</head>
+<body>
+<h2>Orders:</h2>
+
+<ul th:each="item : ${orderList}">
+  <li th:text="${item.orderCode}"></li>
+
+</ul>
+
+</body>
+</html>

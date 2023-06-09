@@ -6,3 +6,11 @@ pluginManagement {
   }
 }
 rootProject.name = 'resource-server'
+/**/
+sourceControl {
+  gitRepository("https://github.com/p3tzata/TrcHelper.git") {
+    producesModule("org.p3tzata:TrcHelper")
+  }
+}
+
+

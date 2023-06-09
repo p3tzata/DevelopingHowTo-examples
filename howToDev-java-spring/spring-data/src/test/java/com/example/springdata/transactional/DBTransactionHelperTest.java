@@ -2,7 +2,7 @@ package com.example.springdata.transactional;
 
 import com.example.springdata.entity.OrderEntity;
 import com.example.springdata.repository.OrderRepository;
-import com.example.springdata.service.OrderService;
+import com.example.springdata.service.transactional.OrderService;
 import com.example.springdata.util.DBTransactionHelper;
 import java.sql.SQLException;
 import org.h2.tools.Server;

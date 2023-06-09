@@ -1,5 +1,6 @@
-package com.example.springdata.service;
+package com.example.springdata.service.transactional;
 
+import com.example.springdata.exception.SomeException;
 import com.example.springdata.entity.OrderEntity;
 import com.example.springdata.repository.OrderRepository;
 import com.example.springdata.util.DBTransactionHelper;
@@ -23,6 +24,59 @@ public class OrderService {
     this.dbTransactionHelper = dbTransactionHelper;
 
   }
+
+  @Transactional
+  public void InTransaction_save_orderService2saveWithNewTransactionThrowError(OrderEntity orderEntity) {
+
+    orderRepository.saveAndFlush(orderEntity);
+
+    try {
+      orderEntity.setId(2L);
+      orderService2.saveWithNewTransactionThrowError(orderEntity); //@Transactional(TxType.REQUIRES_NEW)
+    } catch (Exception exception) {
+      exception.getMessage();
+    }
+  }
+
+  @Transactional
+  public void InTransaction_save_orderService2saveWithTransactionThrowError(OrderEntity orderEntity) {
+
+    orderRepository.saveAndFlush(orderEntity);
+
+    try {
+      orderEntity.setId(2L);
+      orderService2.saveWithTransactionThrowError(orderEntity); //@Transactional
+    } catch (Exception exception) {
+      exception.getMessage();
+    }
+  }
+
+  public void NoTransaction_save_orderService2saveWithTransactionThrowError(OrderEntity orderEntity) {
+
+    orderRepository.saveAndFlush(orderEntity);
+
+    try {
+      orderEntity.setId(2L);
+      orderService2.saveWithTransactionThrowError(orderEntity); //@Transactional
+    } catch (Exception exception) {
+      exception.getMessage();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   @Transactional
   public OrderEntity saveWithTransactional(OrderEntity orderEntity) {
@@ -169,8 +223,10 @@ public class OrderService {
 
   }
 
-  @Transactional
-  public void saveAndPassToService2(OrderEntity orderEntity) {
+
+
+
+  public void NoTransaction_saveAndPassToService2WithNewTransaction(OrderEntity orderEntity) {
 
     orderRepository.saveAndFlush(orderEntity);
     try {
@@ -179,22 +235,18 @@ public class OrderService {
     } catch (Exception exception) {
       exception.getMessage();
     }
-
-
   }
 
-  @Transactional
-  public void saveAndPassToService2WithNewTransaction(OrderEntity orderEntity) {
+  public void save123(OrderEntity orderEntity) {
 
-    orderRepository.saveAndFlush(orderEntity);
-    try {
-      orderEntity.setId(2L);
-      orderService2.saveWithNewTransactionThrowError(orderEntity);
-    } catch (Exception exception) {
-      exception.getMessage();
+    orderService2.saveWithTransaction(orderEntity);
+
+    if(true) {
+      if (true==true) {
+        throw new SomeException("Error from save123");
+      }
     }
   }
-
 
 
 }

@@ -1,0 +1,10 @@
+#//#cu_application.yml
+
+server:
+  port: 8004
+
+eureka:
+  client:
+    register-with-eureka: false # false mean to not register itself to discover-server.
+                                # Apart from this we have only one instance of discovery_server.
+    fetch-registry: false # Don't fetch register from other discovery-server.
