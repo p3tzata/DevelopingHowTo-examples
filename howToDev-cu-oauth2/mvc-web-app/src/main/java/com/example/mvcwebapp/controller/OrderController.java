@@ -59,7 +59,8 @@ public class OrderController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
 
-    //Retrieve authorized client for the specified clientRegistrationId and principalName
+    //Retrieve authorized client(may by like cu-mvc-web-app, google, facebook, github) for the specified clientRegistrationId and
+    // principalName
     //There is case to be handled. When app is restart it loose OAuth2AuthorizedClient.
     OAuth2AuthorizedClient oAuth2AuthorizedClient = oAuth2AuthorizedClientService.loadAuthorizedClient(
         token.getAuthorizedClientRegistrationId(), token.getName());
