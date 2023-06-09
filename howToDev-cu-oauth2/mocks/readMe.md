@@ -20,7 +20,7 @@ Export keycloak db from MySQL Workbench (please use proper version, see it in do
       - Select the whole auth_service DB
       - Dump Structure and Data
     - Export Options panel:
-      - Check To Self-Contained File: <your-repos-dir>/mysql-keycloak-initdb.d/keycloak-dump.sql
+      - Check To Self-Contained File: <your-repos-dir>/mysql-keycloak-initdb.d/keycloak-dump-oauth2.sql
       - Check Include Create Schema
 - Click Advanced Options button and do this:
   - Other panel
