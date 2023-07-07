@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code state reader</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script language="JavaScript">
+      window.onload = function () {
+        getAndRedrectToIndex();
+      };
+
+      function getAndRedrectToIndex() {
+
+        // Get code from query params
+        const urlParams = new URLSearchParams(window.location.search)
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        const session_state = urlParams.get('session_state');
+
+        setTimeout(() => {
+          //Call function postToken() in index.ejs
+          window.opener.getToken(code, state, session_state);
+          window.close();
+        }, 3000)
+        // window.close();
+      }
+
+    </script>
+
+</head>
+<body>
+<h1>This page will be automatically close after 3 sec...</h1>
+
+</body>
+</html>

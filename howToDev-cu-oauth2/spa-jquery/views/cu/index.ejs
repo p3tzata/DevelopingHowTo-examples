@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>javascript app with PKCE</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script language="javascript">
+      window.onload = function () {
+        console.log("test");
+      };
+
+      async function getAuthorizationCode() {
+        const host = 'http://localhost:8001/auth/realms/myRealm/protocol/openid-connect/auth'
+        const clientId = 'cu-spa-jquery'
+        const redirectUri = 'http://localhost:8007/cu/authCallback'
+        const scope = 'openid'
+        const state = document.getElementById('state').innerHTML
+        const challenge = document.getElementById('codeChallenge').innerHTML
+
+        // Build endpoint
+        let endpoint = host;
+        endpoint += `?response_type=code&`
+        endpoint += `client_id=${clientId}&`
+        endpoint += `scope=${scope}&`
+        endpoint += `redirect_uri=${redirectUri}&`
+        endpoint += `state=${state}&`
+        endpoint += `code_challenge=${challenge}&`
+        endpoint += `code_challenge_method=S256`
+
+        console.log(endpoint);
+        // Redirect to authentication server's login page
+        window.open(endpoint, 'loginPage', 'width=800,height=800')
+      }
+
+      async function getToken(code, state, session_state) {
+        console.log("code:" + code);
+        console.log("state:" + state);
+        console.log("session_state:" + session_state);
+
+        const originalState = document.getElementById('state').innerHTML;
+        const verifier = document.getElementById('codeVerifier').innerHTML
+        const host = 'http://localhost:8001/auth/realms/myRealm/protocol/openid-connect/token'
+        const clientId = 'cu-spa-jquery'
+        const redirectUri = 'http://localhost:8007/cu/authCallback'
+        let bodyPostParams = `client_id=${clientId}&`
+        bodyPostParams += `grant_type=authorization_code&`
+        bodyPostParams += `code_verifier=${verifier}&`
+        bodyPostParams += `redirect_uri=${redirectUri}&`
+        bodyPostParams += `code=${code}`
+
+        if (originalState === state) {
+
+          try {
+            const response = await fetch(host, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: bodyPostParams,
+            })
+            const data = await response.json()
+
+            // Token
+            console.log(data)
+            document.getElementById('accessToken').innerHTML = data['access_token'];
+          } catch (e) {
+            console.log(e)
+          }
+
+        } else {
+          alert("Mismatch originalState and state from IdP.");
+        }
+
+      }
+
+      async function getOrdersFromResourceServer(isTroughApi) {
+        let url=''
+
+        if(isTroughApi) {
+          url = 'http://localhost:8003/order/getAll';
+        } else {
+          url = 'http://localhost:8002/order/getAll';
+        }
+
+
+
+
+        const accessToken = document.getElementById('accessToken').innerHTML
+        try {
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Authorization': 'Bearer ' + accessToken
+            }
+          })
+          const data = await response.json()
+
+          // Data
+          console.log(data)
+          document.getElementById('orders').innerHTML = JSON.stringify(data);
+        } catch
+            (e) {
+          console.log(e)
+        }
+      }
+
+      function generateRandomString() {
+        var array = new Uint32Array(28);
+        window.crypto.getRandomValues(array);
+        let state = Array.from(array, dec => ('0' + dec.toString(16)).substr(-2)).join('');
+        document.getElementById('state').innerHTML = state;
+        return state;
+      }
+
+      function generateCodeVerifier() {
+        var array = new Uint32Array(56 / 2);
+        window.crypto.getRandomValues(array);
+        let codeVerifier = Array.from(array, dec2hex).join("");
+        document.getElementById('codeVerifier').innerHTML = codeVerifier;
+        return codeVerifier;
+      }
+
+      async function generateCodeChallengeFromVerifier() {
+        let codeVerifier = document.getElementById('codeVerifier').innerHTML;
+        var hashed = await sha256(codeVerifier);
+        var base64encoded = base64urlencode(hashed);
+        document.getElementById('codeChallenge').innerHTML = base64encoded;
+        return base64encoded;
+      }
+
+      function dec2hex(dec) {
+        return ("0" + dec.toString(16)).substr(-2);
+      }
+
+      function sha256(plain) {
+        // returns promise ArrayBuffer
+        const encoder = new TextEncoder();
+        const data = encoder.encode(plain);
+        return window.crypto.subtle.digest("SHA-256", data);
+      }
+
+      function base64urlencode(a) {
+        var str = "";
+        var bytes = new Uint8Array(a);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+          str += String.fromCharCode(bytes[i]);
+        }
+        return btoa(str)
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/, "");
+      }
+
+
+    </script>
+</head>
+<body>
+<h1><%= msg %></h1>
+
+State:
+<div id="state"></div>
+<br>
+<input type="button" value="1. Generate state" onClick="generateRandomString();"><br>
+<br><br>
+CodeVerifier:
+<div id="codeVerifier"></div>
+<br>
+<input type="button" value="2. Generate codeVerifier" onClick="generateCodeVerifier();"><br>
+<br><br>
+codeChallenge:
+<div id="codeChallenge"></div>
+<br>
+<input type="button" value="3. Generate codeChallenge" onClick="generateCodeChallengeFromVerifier();"><br>
+<br><br>
+<input type="button" value="4. Get authorization code" onClick="getAuthorizationCode();"><br>
+<br><br>
+Access token:
+<div id="accessToken"></div>
+<br><br>
+<input type="button" value="5. Get orders from resource server trough API" onClick="getOrdersFromResourceServer(true);"> -
+<input type="button" value="5. Get orders from resource server" onClick="getOrdersFromResourceServer(false);"><br>
+<br><br>
+Orders:
+<div id="orders"></div>
+</body>
+</html>

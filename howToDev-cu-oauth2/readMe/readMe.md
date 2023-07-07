@@ -70,3 +70,10 @@ Export keycloak db from MySQL Workbench (please use proper version, see it in do
 - `eureka.instance.instance-id==${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}`
 - `lb://resource-server` - to address some other eureka client
 
+# Spa-jquery
+Created with express generator with ejs view engine.
+- `npm install`
+- `npm start`
+
+Max port: 8007
+
