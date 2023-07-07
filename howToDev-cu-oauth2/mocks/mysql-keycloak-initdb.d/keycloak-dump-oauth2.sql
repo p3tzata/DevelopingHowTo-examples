@@ -1,15 +1,15 @@
 CREATE DATABASE  IF NOT EXISTS `auth_service` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `auth_service`;
--- MySQL dump 10.13  Distrib 8.0.31, for macos12 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for macos10.14 (x86_64)
 --
 -- Host: 127.0.0.1    Database: auth_service
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `auth_service`;
 
 DROP TABLE IF EXISTS `ADMIN_EVENT_ENTITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `ADMIN_EVENT_ENTITY` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ADMIN_EVENT_TIME` bigint DEFAULT NULL,
@@ -57,7 +57,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ASSOCIATED_POLICY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `ASSOCIATED_POLICY` (
   `POLICY_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ASSOCIATED_POLICY_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -83,7 +83,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `AUTHENTICATION_EXECUTION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `AUTHENTICATION_EXECUTION` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ALIAS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -212,7 +212,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `AUTHENTICATION_FLOW`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `AUTHENTICATION_FLOW` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ALIAS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -282,7 +282,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `AUTHENTICATOR_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `AUTHENTICATOR_CONFIG` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ALIAS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -312,7 +312,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `AUTHENTICATOR_CONFIG_ENTRY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `AUTHENTICATOR_CONFIG_ENTRY` (
   `AUTHENTICATOR_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -340,7 +340,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `BROKER_LINK`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `BROKER_LINK` (
   `IDENTITY_PROVIDER` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `STORAGE_PROVIDER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -368,7 +368,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ENABLED` bit(1) NOT NULL DEFAULT b'0',
@@ -408,9 +408,11 @@ CREATE TABLE `CLIENT` (
 
 LOCK TABLES `CLIENT` WRITE;
 /*!40000 ALTER TABLE `CLIENT` DISABLE KEYS */;
+INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39',_binary '',_binary '','cu-spa-jquery',0,_binary '',NULL,NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',-1,_binary '\0',_binary '\0',NULL,_binary '\0','client-secret',NULL,NULL,NULL,_binary '',_binary '\0',_binary '',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('215f0e81-2f4a-4af0-a1f8-dacb16123d21',_binary '',_binary '\0','admin-cli',0,_binary '',NULL,NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',0,_binary '\0',_binary '\0','${client_admin-cli}',_binary '\0','client-secret',NULL,NULL,NULL,_binary '\0',_binary '\0',_binary '',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40',_binary '',_binary '','cu-onlyForGetToken',0,_binary '\0','yjTIs1lZ9007K9dYts2NVrK9piO0sg70',NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',-1,_binary '\0',_binary '\0',NULL,_binary '\0','client-secret',NULL,NULL,NULL,_binary '',_binary '\0',_binary '',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7',_binary '',_binary '\0','security-admin-console',0,_binary '',NULL,'/admin/myRealm/console/',_binary '\0',NULL,_binary '\0','myRealm','openid-connect',0,_binary '\0',_binary '\0','${client_security-admin-console}',_binary '\0','client-secret','${authAdminUrl}',NULL,NULL,_binary '',_binary '\0',_binary '\0',_binary '\0');
+INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460',_binary '',_binary '','cu-mvc-web-app-socialLogin',0,_binary '\0','pcDBOxSdwwQCgXwEmQLEWOD1K2VWbeO1',NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',-1,_binary '\0',_binary '\0',NULL,_binary '\0','client-secret',NULL,NULL,NULL,_binary '',_binary '\0',_binary '',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('7d76f094-a7b6-4acb-9c54-dbb45857d8de',_binary '',_binary '\0','account',0,_binary '',NULL,'/realms/master/account/',_binary '\0',NULL,_binary '\0','e810ef94-3763-43cb-b70b-f5229124accb','openid-connect',0,_binary '\0',_binary '\0','${client_account}',_binary '\0','client-secret','${authBaseUrl}',NULL,NULL,_binary '',_binary '\0',_binary '\0',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('7e231a55-d5ae-43c7-9cd4-2b1c88c6edf1',_binary '',_binary '','cu-MyDemo',0,_binary '',NULL,NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',-1,_binary '\0',_binary '\0',NULL,_binary '\0','client-secret',NULL,NULL,NULL,_binary '',_binary '\0',_binary '',_binary '\0');
 INSERT INTO `CLIENT` (`ID`, `ENABLED`, `FULL_SCOPE_ALLOWED`, `CLIENT_ID`, `NOT_BEFORE`, `PUBLIC_CLIENT`, `SECRET`, `BASE_URL`, `BEARER_ONLY`, `MANAGEMENT_URL`, `SURROGATE_AUTH_REQUIRED`, `REALM_ID`, `PROTOCOL`, `NODE_REREG_TIMEOUT`, `FRONTCHANNEL_LOGOUT`, `CONSENT_REQUIRED`, `NAME`, `SERVICE_ACCOUNTS_ENABLED`, `CLIENT_AUTHENTICATOR_TYPE`, `ROOT_URL`, `DESCRIPTION`, `REGISTRATION_TOKEN`, `STANDARD_FLOW_ENABLED`, `IMPLICIT_FLOW_ENABLED`, `DIRECT_ACCESS_GRANTS_ENABLED`, `ALWAYS_DISPLAY_IN_CONSOLE`) VALUES ('8389be12-e20b-4d70-a12e-3eda8f7932aa',_binary '',_binary '','cu-mvc-web-app',0,_binary '\0','SdXSet8ikgArfo2HCLhIVUBqP2E42stq',NULL,_binary '\0',NULL,_binary '\0','myRealm','openid-connect',-1,_binary '\0',_binary '\0',NULL,_binary '\0','client-secret',NULL,NULL,NULL,_binary '',_binary '\0',_binary '\0',_binary '\0');
@@ -433,7 +435,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_ATTRIBUTES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_ATTRIBUTES` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -450,6 +452,33 @@ CREATE TABLE `CLIENT_ATTRIBUTES` (
 
 LOCK TABLES `CLIENT_ATTRIBUTES` WRITE;
 /*!40000 ALTER TABLE `CLIENT_ATTRIBUTES` DISABLE KEYS */;
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','{}','acr.loa.map');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','backchannel.logout.revoke.offline.tokens');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','true','backchannel.logout.session.required');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','client_credentials.use_refresh_token');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','display.on.consent.screen');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','exclude.session.state.from.auth.response');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','frontchannel.logout.session.required');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','id.token.as.detached.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','oauth2.device.authorization.grant.enabled');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','oidc.ciba.grant.enabled');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','S256','pkce.code.challenge.method');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','require.pushed.authorization.requests');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml_force_name_id_format');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.allow.ecp.flow');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.artifact.binding');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.assertion.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.authnstatement');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.client.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.encrypt');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.force.post.binding');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.multivalued.roles');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.onetimeuse.condition');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.server.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','saml.server.signature.keyinfo.ext');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','tls.client.certificate.bound.access.tokens');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','false','token.response.type.bearer.lower-case');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','true','use.refresh.tokens');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','{}','acr.loa.map');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','false','backchannel.logout.revoke.offline.tokens');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','true','backchannel.logout.session.required');
@@ -478,6 +507,33 @@ INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','false','token.response.type.bearer.lower-case');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','true','use.refresh.tokens');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','S256','pkce.code.challenge.method');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','{}','acr.loa.map');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','backchannel.logout.revoke.offline.tokens');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','true','backchannel.logout.session.required');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','client_credentials.use_refresh_token');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','1686311393','client.secret.creation.time');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','display.on.consent.screen');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','exclude.session.state.from.auth.response');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','frontchannel.logout.session.required');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','id.token.as.detached.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','oauth2.device.authorization.grant.enabled');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','oidc.ciba.grant.enabled');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','require.pushed.authorization.requests');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml_force_name_id_format');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.allow.ecp.flow');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.artifact.binding');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.assertion.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.authnstatement');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.client.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.encrypt');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.force.post.binding');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.multivalued.roles');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.onetimeuse.condition');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.server.signature');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','saml.server.signature.keyinfo.ext');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','tls.client.certificate.bound.access.tokens');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','false','token.response.type.bearer.lower-case');
+INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','true','use.refresh.tokens');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('7e231a55-d5ae-43c7-9cd4-2b1c88c6edf1','{}','acr.loa.map');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('7e231a55-d5ae-43c7-9cd4-2b1c88c6edf1','false','backchannel.logout.revoke.offline.tokens');
 INSERT INTO `CLIENT_ATTRIBUTES` (`CLIENT_ID`, `VALUE`, `NAME`) VALUES ('7e231a55-d5ae-43c7-9cd4-2b1c88c6edf1','true','backchannel.logout.session.required');
@@ -543,7 +599,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_AUTH_FLOW_BINDINGS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_AUTH_FLOW_BINDINGS` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `FLOW_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -567,7 +623,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_INITIAL_ACCESS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_INITIAL_ACCESS` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -596,7 +652,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_NODE_REGISTRATIONS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_NODE_REGISTRATIONS` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` int DEFAULT NULL,
@@ -621,7 +677,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SCOPE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -671,7 +727,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SCOPE_ATTRIBUTES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SCOPE_ATTRIBUTES` (
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -753,7 +809,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SCOPE_CLIENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SCOPE_CLIENT` (
   `CLIENT_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SCOPE_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -770,6 +826,15 @@ CREATE TABLE `CLIENT_SCOPE_CLIENT` (
 
 LOCK TABLES `CLIENT_SCOPE_CLIENT` WRITE;
 /*!40000 ALTER TABLE `CLIENT_SCOPE_CLIENT` DISABLE KEYS */;
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','065158f3-390f-42b3-8666-852906e538fa',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','0b8672d9-a343-409a-8d03-2fc8f8b314aa',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','179593fa-2506-499a-944e-77ffe4b6fdd1',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','2b958474-6d3d-44f0-838f-e353223692f5',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','4fa058aa-5d90-41f3-816d-3b97b15cee0f',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','56804cff-2c5f-4c70-8822-dc9a87c9f997',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','bc2f9339-ed10-4060-b0ce-cf30d11fcc53',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','ccbef8af-20f1-474d-98b5-aa0a30340b70',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','e1828105-24e0-4627-9827-0734c1296f99',_binary '\0');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('215f0e81-2f4a-4af0-a1f8-dacb16123d21','065158f3-390f-42b3-8666-852906e538fa',_binary '\0');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('215f0e81-2f4a-4af0-a1f8-dacb16123d21','0b8672d9-a343-409a-8d03-2fc8f8b314aa',_binary '');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('215f0e81-2f4a-4af0-a1f8-dacb16123d21','179593fa-2506-499a-944e-77ffe4b6fdd1',_binary '');
@@ -798,6 +863,15 @@ INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VAL
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','bc2f9339-ed10-4060-b0ce-cf30d11fcc53',_binary '');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','ccbef8af-20f1-474d-98b5-aa0a30340b70',_binary '');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','e1828105-24e0-4627-9827-0734c1296f99',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','065158f3-390f-42b3-8666-852906e538fa',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','0b8672d9-a343-409a-8d03-2fc8f8b314aa',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','179593fa-2506-499a-944e-77ffe4b6fdd1',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','2b958474-6d3d-44f0-838f-e353223692f5',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','4fa058aa-5d90-41f3-816d-3b97b15cee0f',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','56804cff-2c5f-4c70-8822-dc9a87c9f997',_binary '\0');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','bc2f9339-ed10-4060-b0ce-cf30d11fcc53',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','ccbef8af-20f1-474d-98b5-aa0a30340b70',_binary '');
+INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','e1828105-24e0-4627-9827-0734c1296f99',_binary '\0');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('7d76f094-a7b6-4acb-9c54-dbb45857d8de','0a0b84ad-2758-407c-8acc-49fb64d4578e',_binary '');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('7d76f094-a7b6-4acb-9c54-dbb45857d8de','52dbc43c-d0bd-461e-bc9f-941f7f551435',_binary '\0');
 INSERT INTO `CLIENT_SCOPE_CLIENT` (`CLIENT_ID`, `SCOPE_ID`, `DEFAULT_SCOPE`) VALUES ('7d76f094-a7b6-4acb-9c54-dbb45857d8de','57b42671-20c2-4579-9cf5-4c3431917edb',_binary '');
@@ -912,7 +986,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SCOPE_ROLE_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SCOPE_ROLE_MAPPING` (
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ROLE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -940,7 +1014,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SESSION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SESSION` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -973,7 +1047,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SESSION_AUTH_STATUS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SESSION_AUTH_STATUS` (
   `AUTHENTICATOR` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `STATUS` int DEFAULT NULL,
@@ -998,7 +1072,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SESSION_NOTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SESSION_NOTE` (
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1023,7 +1097,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SESSION_PROT_MAPPER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SESSION_PROT_MAPPER` (
   `PROTOCOL_MAPPER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_SESSION` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1047,7 +1121,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_SESSION_ROLE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_SESSION_ROLE` (
   `ROLE_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_SESSION` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1071,7 +1145,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CLIENT_USER_SESSION_NOTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CLIENT_USER_SESSION_NOTE` (
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -1096,7 +1170,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `COMPONENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `COMPONENT` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1151,7 +1225,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `COMPONENT_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `COMPONENT_CONFIG` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `COMPONENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1252,7 +1326,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `COMPOSITE_ROLE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `COMPOSITE_ROLE` (
   `COMPOSITE` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CHILD_ROLE` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1355,7 +1429,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CREDENTIAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `CREDENTIAL` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SALT` tinyblob,
@@ -1389,7 +1463,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `DATABASECHANGELOG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `DATABASECHANGELOG` (
   `ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `AUTHOR` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1529,7 +1603,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `DATABASECHANGELOGLOCK`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `DATABASECHANGELOGLOCK` (
   `ID` int NOT NULL,
   `LOCKED` bit(1) NOT NULL,
@@ -1557,7 +1631,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `DEFAULT_CLIENT_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `DEFAULT_CLIENT_SCOPE` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1604,7 +1678,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `EVENT_ENTITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `EVENT_ENTITY` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1636,7 +1710,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FEDERATED_IDENTITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FEDERATED_IDENTITY` (
   `IDENTITY_PROVIDER` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1666,7 +1740,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FEDERATED_USER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FEDERATED_USER` (
   `ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `STORAGE_PROVIDER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1690,7 +1764,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_ATTRIBUTE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1718,7 +1792,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_CONSENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_CONSENT` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1751,7 +1825,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_CONSENT_CL_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_CONSENT_CL_SCOPE` (
   `USER_CONSENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1774,7 +1848,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_CREDENTIAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_CREDENTIAL` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SALT` tinyblob,
@@ -1808,7 +1882,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_GROUP_MEMBERSHIP`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_GROUP_MEMBERSHIP` (
   `GROUP_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1835,7 +1909,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_REQUIRED_ACTION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_REQUIRED_ACTION` (
   `REQUIRED_ACTION` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ' ',
   `USER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1862,7 +1936,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FED_USER_ROLE_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `FED_USER_ROLE_MAPPING` (
   `ROLE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1889,7 +1963,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `GROUP_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `GROUP_ATTRIBUTE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sybase-needs-something-here',
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1916,7 +1990,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `GROUP_ROLE_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `GROUP_ROLE_MAPPING` (
   `ROLE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `GROUP_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1941,7 +2015,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `IDENTITY_PROVIDER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `IDENTITY_PROVIDER` (
   `INTERNAL_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ENABLED` bit(1) NOT NULL DEFAULT b'0',
@@ -1978,7 +2052,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `IDENTITY_PROVIDER_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `IDENTITY_PROVIDER_CONFIG` (
   `IDENTITY_PROVIDER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -2003,7 +2077,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `IDENTITY_PROVIDER_MAPPER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `IDENTITY_PROVIDER_MAPPER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2031,7 +2105,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `IDP_MAPPER_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `IDP_MAPPER_CONFIG` (
   `IDP_MAPPER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -2056,7 +2130,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `KEYCLOAK_GROUP`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `KEYCLOAK_GROUP` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
@@ -2082,7 +2156,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `KEYCLOAK_ROLE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `KEYCLOAK_ROLE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_REALM_CONSTRAINT` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2198,7 +2272,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `MIGRATION_MODEL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `MIGRATION_MODEL` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VERSION` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2224,7 +2298,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `OFFLINE_CLIENT_SESSION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `OFFLINE_CLIENT_SESSION` (
   `USER_SESSION_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2254,7 +2328,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `OFFLINE_USER_SESSION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `OFFLINE_USER_SESSION` (
   `USER_SESSION_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USER_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2286,7 +2360,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `POLICY_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `POLICY_CONFIG` (
   `POLICY_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2311,7 +2385,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PROTOCOL_MAPPER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `PROTOCOL_MAPPER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2337,6 +2411,7 @@ INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`,
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('088aca22-eb57-4182-a584-58285d417950','zoneinfo','openid-connect','oidc-usermodel-attribute-mapper',NULL,'ccbef8af-20f1-474d-98b5-aa0a30340b70');
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('09709b1b-0303-4584-b134-64e3b0a80049','phone number','openid-connect','oidc-usermodel-attribute-mapper',NULL,'52dbc43c-d0bd-461e-bc9f-941f7f551435');
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('17f95fce-f5dc-406e-870c-eecb1d69128e','audience resolve','openid-connect','oidc-audience-resolve-mapper','ba72da23-8ec5-4150-8de8-22b7e39be868',NULL);
+INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','cu-custom-mapper','openid-connect','oidc-usermodel-attribute-mapper','348f404a-83bf-4039-905f-3d6ea6519d40',NULL);
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('21f51e15-ea55-4f8f-a45c-e69d9198c603','full name','openid-connect','oidc-full-name-mapper',NULL,'57b42671-20c2-4579-9cf5-4c3431917edb');
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('25e6f3c3-7904-4804-a7f9-a0d5ce5dd8b9','allowed web origins','openid-connect','oidc-allowed-origins-mapper',NULL,'5da6968d-da8c-4e80-b281-7b52e81116a4');
 INSERT INTO `PROTOCOL_MAPPER` (`ID`, `NAME`, `PROTOCOL`, `PROTOCOL_MAPPER_NAME`, `CLIENT_ID`, `CLIENT_SCOPE_ID`) VALUES ('281d2b05-5710-4060-8a3c-6b7ad80e781d','middle name','openid-connect','oidc-usermodel-attribute-mapper',NULL,'ccbef8af-20f1-474d-98b5-aa0a30340b70');
@@ -2400,7 +2475,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PROTOCOL_MAPPER_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `PROTOCOL_MAPPER_CONFIG` (
   `PROTOCOL_MAPPER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -2434,6 +2509,11 @@ INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VAL
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('09709b1b-0303-4584-b134-64e3b0a80049','String','jsonType.label');
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('09709b1b-0303-4584-b134-64e3b0a80049','phoneNumber','user.attribute');
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('09709b1b-0303-4584-b134-64e3b0a80049','true','userinfo.token.claim');
+INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','true','access.token.claim');
+INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','cu-favorite-movies','claim.name');
+INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','true','id.token.claim');
+INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','cu-custom-user-attributes-favorite-movies','user.attribute');
+INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('1f636745-65d0-44ed-920f-bbaba6883338','true','userinfo.token.claim');
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('21f51e15-ea55-4f8f-a45c-e69d9198c603','true','access.token.claim');
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('21f51e15-ea55-4f8f-a45c-e69d9198c603','true','id.token.claim');
 INSERT INTO `PROTOCOL_MAPPER_CONFIG` (`PROTOCOL_MAPPER_ID`, `VALUE`, `NAME`) VALUES ('21f51e15-ea55-4f8f-a45c-e69d9198c603','true','userinfo.token.claim');
@@ -2719,7 +2799,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ACCESS_CODE_LIFESPAN` int DEFAULT NULL,
@@ -2797,7 +2877,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_ATTRIBUTE` (
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2888,7 +2968,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_DEFAULT_GROUPS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_DEFAULT_GROUPS` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `GROUP_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2914,7 +2994,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_ENABLED_EVENT_TYPES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_ENABLED_EVENT_TYPES` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2939,7 +3019,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_EVENTS_LISTENERS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_EVENTS_LISTENERS` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2966,7 +3046,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_LOCALIZATIONS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_LOCALIZATIONS` (
   `REALM_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `LOCALE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2990,7 +3070,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_REQUIRED_CREDENTIAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_REQUIRED_CREDENTIAL` (
   `TYPE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `FORM_LABEL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3019,7 +3099,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_SMTP_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_SMTP_CONFIG` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3044,7 +3124,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REALM_SUPPORTED_LOCALES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REALM_SUPPORTED_LOCALES` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3069,7 +3149,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REDIRECT_URIS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REDIRECT_URIS` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3085,8 +3165,10 @@ CREATE TABLE `REDIRECT_URIS` (
 
 LOCK TABLES `REDIRECT_URIS` WRITE;
 /*!40000 ALTER TABLE `REDIRECT_URIS` DISABLE KEYS */;
+INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','http://localhost:8007/cu/authCallback');
 INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('348f404a-83bf-4039-905f-3d6ea6519d40','/test');
 INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','/admin/myRealm/console/*');
+INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('713e513f-5c99-4552-a722-297bb51e8460','http://localhost:8006/login/oauth2/code/mvcwebappsociallogin');
 INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('7d76f094-a7b6-4acb-9c54-dbb45857d8de','/realms/master/account/*');
 INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('7e231a55-d5ae-43c7-9cd4-2b1c88c6edf1','/test');
 INSERT INTO `REDIRECT_URIS` (`CLIENT_ID`, `VALUE`) VALUES ('8389be12-e20b-4d70-a12e-3eda8f7932aa','http://localhost:8005/login/oauth2/code/mvcwebapp');
@@ -3103,7 +3185,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REQUIRED_ACTION_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REQUIRED_ACTION_CONFIG` (
   `REQUIRED_ACTION_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -3127,7 +3209,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `REQUIRED_ACTION_PROVIDER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `REQUIRED_ACTION_PROVIDER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ALIAS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3172,7 +3254,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_ATTRIBUTE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sybase-needs-something-here',
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3199,7 +3281,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_POLICY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_POLICY` (
   `RESOURCE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `POLICY_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3225,7 +3307,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SCOPE` (
   `RESOURCE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3251,7 +3333,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SERVER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SERVER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ALLOW_RS_REMOTE_MGMT` bit(1) NOT NULL DEFAULT b'0',
@@ -3276,7 +3358,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SERVER_PERM_TICKET`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SERVER_PERM_TICKET` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `OWNER` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3315,7 +3397,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SERVER_POLICY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SERVER_POLICY` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3347,7 +3429,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SERVER_RESOURCE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SERVER_RESOURCE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3379,7 +3461,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_SERVER_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_SERVER_SCOPE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3408,7 +3490,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `RESOURCE_URIS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `RESOURCE_URIS` (
   `RESOURCE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3432,7 +3514,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ROLE_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `ROLE_ATTRIBUTE` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ROLE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3459,7 +3541,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `SCOPE_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `SCOPE_MAPPING` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ROLE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3486,7 +3568,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `SCOPE_POLICY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `SCOPE_POLICY` (
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `POLICY_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3512,7 +3594,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USERNAME_LOGIN_FAILURE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USERNAME_LOGIN_FAILURE` (
   `REALM_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USERNAME` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
@@ -3539,7 +3621,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_ATTRIBUTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_ATTRIBUTE` (
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
@@ -3558,6 +3640,7 @@ CREATE TABLE `USER_ATTRIBUTE` (
 
 LOCK TABLES `USER_ATTRIBUTE` WRITE;
 /*!40000 ALTER TABLE `USER_ATTRIBUTE` DISABLE KEYS */;
+INSERT INTO `USER_ATTRIBUTE` (`NAME`, `VALUE`, `USER_ID`, `ID`) VALUES ('cu-custom-user-attributes-favorite-movies','rambo','3b99ec4a-7527-4c79-ae55-0ebf9131d3a8','9cf9c2b6-02b6-47b8-9181-ad1f6a6858bf');
 /*!40000 ALTER TABLE `USER_ATTRIBUTE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3567,7 +3650,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_CONSENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_CONSENT` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CLIENT_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3598,7 +3681,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_CONSENT_CLIENT_SCOPE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_CONSENT_CLIENT_SCOPE` (
   `USER_CONSENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `SCOPE_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3623,7 +3706,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_ENTITY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_ENTITY` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `EMAIL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3663,7 +3746,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_FEDERATION_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_FEDERATION_CONFIG` (
   `USER_FEDERATION_PROVIDER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3688,7 +3771,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_FEDERATION_MAPPER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_FEDERATION_MAPPER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3718,7 +3801,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_FEDERATION_MAPPER_CONFIG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_FEDERATION_MAPPER_CONFIG` (
   `USER_FEDERATION_MAPPER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3743,7 +3826,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_FEDERATION_PROVIDER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_FEDERATION_PROVIDER` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `CHANGED_SYNC_PERIOD` int DEFAULT NULL,
@@ -3774,7 +3857,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_GROUP_MEMBERSHIP`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_GROUP_MEMBERSHIP` (
   `GROUP_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3799,7 +3882,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_REQUIRED_ACTION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_REQUIRED_ACTION` (
   `USER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `REQUIRED_ACTION` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ' ',
@@ -3824,7 +3907,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_ROLE_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_ROLE_MAPPING` (
   `ROLE_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `USER_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3870,7 +3953,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_SESSION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_SESSION` (
   `ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `AUTH_METHOD` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3903,7 +3986,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER_SESSION_NOTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `USER_SESSION_NOTE` (
   `USER_SESSION` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3928,7 +4011,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `WEB_ORIGINS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `WEB_ORIGINS` (
   `CLIENT_ID` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3944,6 +4027,7 @@ CREATE TABLE `WEB_ORIGINS` (
 
 LOCK TABLES `WEB_ORIGINS` WRITE;
 /*!40000 ALTER TABLE `WEB_ORIGINS` DISABLE KEYS */;
+INSERT INTO `WEB_ORIGINS` (`CLIENT_ID`, `VALUE`) VALUES ('1748d50d-1160-42b1-a32e-f58d00161c39','+');
 INSERT INTO `WEB_ORIGINS` (`CLIENT_ID`, `VALUE`) VALUES ('65276c8e-b3a5-4376-a32a-af9612b26fe7','+');
 INSERT INTO `WEB_ORIGINS` (`CLIENT_ID`, `VALUE`) VALUES ('cdf9904a-f867-46de-8f2a-34b701b9ba32','+');
 /*!40000 ALTER TABLE `WEB_ORIGINS` ENABLE KEYS */;
@@ -3958,4 +4042,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09  9:38:06
+-- Dump completed on 2023-07-07  8:19:13
