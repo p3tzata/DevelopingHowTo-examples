@@ -1,5 +1,6 @@
 # Mocks:
-` bash index.bash status`
+- Edit env in mocks-config.bash
+- `bash mocks.bash help`
 
 
 ## Keycloak:
