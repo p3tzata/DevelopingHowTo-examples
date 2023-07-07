@@ -1,7 +1,6 @@
 #!/bin/bash
 
-dockerComposeFile=docker-compose-mystique.yml
-kafkaHome=/opt/homebrew/bin
+source "mocks-config.bash"
 
 if [ "$1" = "up-no-recreate" ]; then
     docker-compose -f $dockerComposeFile up --no-recreate
@@ -40,19 +39,19 @@ fi
 if [ "$1" = "kafka" ]; then
 
    if [ "$2" = "consumer" ]; then
-   $kafkaHome/kafka-console-consumer --bootstrap-server localhost:9092 --topic $3 --from-beginning --property "print.key=true" --property "print.value=true" --property "key.separator= : "
+   $kafkaHome/kafka-console-consumer --bootstrap-server $kafkaBootstrapServer --topic $3 --from-beginning --property "print.key=true" --property "print.value=true" --property "key.separator= : "
    fi
 
    if [ "$2" = "producer" ]; then
-   tr '\n' ' ' < $4 | $kafkaHome/kafka-console-producer --broker-list localhost:9092 --topic $3 --property "parse.key=true" --property "key.separator=:"
+   tr '\n' ' ' < $4 | $kafkaHome/kafka-console-producer --broker-list $kafkaBootstrapServer --topic $3 --property "parse.key=true" --property "key.separator=:"
    fi
 
    if [ "$2" = "delete" ]; then
-    $kafkaHome/kafka-delete-records --bootstrap-server localhost:9092 -offset-json-file $3
+    $kafkaHome/kafka-delete-records --bootstrap-server $kafkaBootstrapServer -offset-json-file $3
    fi
 
    if [ "$2" = "listTopics" ]; then
-    $kafkaHome/kafka-topics --bootstrap-server localhost:9092 --list
+    $kafkaHome/kafka-topics --bootstrap-server $kafkaBootstrapServer --list
    fi
 
    exit
