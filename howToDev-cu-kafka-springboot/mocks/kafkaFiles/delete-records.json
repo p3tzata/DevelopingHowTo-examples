@@ -1,0 +1,19 @@
+{
+  "partitions": [
+    {
+      "topic": "test-topic",
+      "partition": 0,
+      "offset": -1
+    },{
+      "topic": "test-topic",
+      "partition": 1,
+      "offset": -1
+    },{
+      "topic": "test-topic",
+      "partition": 2,
+      "offset": -1
+    }],
+  "version": 1
+}
+
+

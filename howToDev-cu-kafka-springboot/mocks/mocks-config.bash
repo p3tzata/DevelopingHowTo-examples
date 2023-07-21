@@ -2,4 +2,4 @@
 
 dockerComposeFile=docker-compose-kafka-springboot.yml
 kafkaHome=/opt/homebrew/bin
-kafkaBootstrapServer=localhost:49092
+kafkaBootstrapServer=localhost:19092
