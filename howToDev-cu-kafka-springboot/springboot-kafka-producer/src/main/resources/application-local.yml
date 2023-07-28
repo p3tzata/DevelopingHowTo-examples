@@ -1,0 +1,10 @@
+#cu - kafka application settings - local profile
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9093,localhost:9094,localhost:9095 #This is mandatory
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer #This is mandatory
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
+    admin:
+      properties:
+        bootstrap.servers: localhost:9093,localhost:9094,localhost:9095

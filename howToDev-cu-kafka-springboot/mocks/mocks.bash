@@ -1,5 +1,5 @@
 #!/bin/bash
-
+version=26072023
 source "mocks-config.bash"
 
 if [ "$1" = "up-no-recreate" ]; then
@@ -7,13 +7,23 @@ if [ "$1" = "up-no-recreate" ]; then
     exit
 fi
 
-if [ "$1" = "start" ] || [ "$1" = "stop" ]; then
+if [ "$1" = "down" ] || [ "$1" = "start" ] || [ "$1" = "stop" ]; then
+
+    if [ "$1" = "down" ]; then
+    read -t 20 -p 'This will remove ALL containers, if you are sure type - DOWN: ' line
+
+      if [ "$line" != "DOWN" ]; then
+        echo 'Exiting without any changes.'
+        exit
+      fi
+    fi
+
     docker-compose -f $dockerComposeFile $1
     exit
 fi
 
 if [ "$1" = "status" ]; then
-    docker ps --format '{{.Status}} {{.Names}}'
+    docker ps --format '{{.Status}} {{.Names}}' | grep $dockerPrefixContainer
     exit
 fi
 if [ "$1" = "statusAll" ]; then
@@ -52,6 +62,10 @@ if [ "$1" = "kafka" ]; then
 
    if [ "$2" = "listTopics" ]; then
     $kafkaHome/kafka-topics --bootstrap-server $kafkaBootstrapServer --list
+   fi
+
+   if [ "$2" = "describeTopics" ]; then
+       $kafkaHome/kafka-topics --bootstrap-server $kafkaBootstrapServer --describe
    fi
 
    exit

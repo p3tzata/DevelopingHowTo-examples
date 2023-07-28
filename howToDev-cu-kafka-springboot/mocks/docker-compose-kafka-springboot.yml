@@ -1,57 +1,113 @@
-version: '3.3'
+version: '2.3'
+
 services:
   cu-kafka-springboot-zookeeper:
+    healthcheck:
+      test: ["CMD-SHELL",  "/usr/bin/nc -z localhost 2181 || exit -1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    image: confluentinc/cp-zookeeper:7.3.2
+    hostname: cu-kafka-springboot-zookeeper
     container_name: cu-kafka-springboot-zookeeper
-    image: zookeeper:3.4.10
     ports:
       - "42181:2181"
       - "42888:2888"
       - "43888:3888"
-
-  cu-kafka-springboot-kafka-1:
-    image: wurstmeister/kafka:2.11-0.11.0.3
-    container_name: cu-kafka-springboot-kafka-1
-    ports:
-      - "19092:9092"
-    depends_on:
-      - cu-kafka-springboot-zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-1:9092,INTERNAL://cu-kafka-springboot-kafka-1:49092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092,INTERNAL://cu-kafka-springboot-kafka-1:49092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-
-  cu-kafka-springboot-kafka-2:
-    image: wurstmeister/kafka:2.11-0.11.0.3
-    container_name: cu-kafka-springboot-kafka-2
-    ports:
-      - "29092:9092"
-    depends_on:
-      - cu-kafka-springboot-zookeeper
-    environment:
-      KAFKA_BROKER_ID: 2
-      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-2:9092,INTERNAL://cu-kafka-springboot-kafka-2:49092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092,INTERNAL://cu-kafka-springboot-kafka-2:49092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: cu-kafka-springboot-zookeeper:2888:3888
 
   cu-kafka-springboot-kafka-3:
-    image: wurstmeister/kafka:2.11-0.11.0.3
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "cu-kafka-springboot-kafka-3:9093", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    image: confluentinc/cp-kafka:7.3.2
+    hostname: cu-kafka-springboot-kafka-3
     container_name: cu-kafka-springboot-kafka-3
     ports:
-      - "39092:9092"
-    depends_on:
-      - cu-kafka-springboot-zookeeper
-      - cu-kafka-springboot-kafka-1
-      - cu-kafka-springboot-kafka-2
+      - "9093:9093"
+      - "29093:29093"
     environment:
-      KAFKA_BROKER_ID: 3
-      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-3:9092,INTERNAL://cu-kafka-springboot-kafka-3:49092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:39092,INTERNAL://cu-kafka-springboot-kafka-3:49092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://cu-kafka-springboot-kafka-3:19093,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9093,DOCKER://host.docker.internal:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_CREATE_TOPICS: "test-topic:3:3"
+      KAFKA_ZOOKEEPER_CONNECT: "cu-kafka-springboot-zookeeper:2181"
+      KAFKA_BROKER_ID: 3
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    depends_on:
+      cu-kafka-springboot-zookeeper:
+        condition: service_healthy
+
+  cu-kafka-springboot-kafka-4:
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "cu-kafka-springboot-kafka-4:9094", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    image: confluentinc/cp-kafka:7.3.2
+    hostname: cu-kafka-springboot-kafka-4
+    container_name: cu-kafka-springboot-kafka-4
+    ports:
+      - "9094:9094"
+      - "29094:29094"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://cu-kafka-springboot-kafka-4:19094,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9094,DOCKER://host.docker.internal:29094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "cu-kafka-springboot-zookeeper:2181"
+      KAFKA_BROKER_ID: 4
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    depends_on:
+      cu-kafka-springboot-zookeeper:
+        condition: service_healthy
+
+  cu-kafka-springboot-kafka-5:
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "cu-kafka-springboot-kafka-5:9095", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    image: confluentinc/cp-kafka:7.3.2
+    hostname: cu-kafka-springboot-kafka-5
+    container_name: cu-kafka-springboot-kafka-5
+    ports:
+      - "9095:9095"
+      - "29095:29095"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://cu-kafka-springboot-kafka-5:19095,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9095,DOCKER://host.docker.internal:29095
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "cu-kafka-springboot-zookeeper:2181"
+      KAFKA_BROKER_ID: 5
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    depends_on:
+      cu-kafka-springboot-zookeeper:
+        condition: service_healthy
+
+  cu-kafka-springboot-init-kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    hostname: cu-kafka-springboot-init-kafka
+    container_name: cu-kafka-springboot-init-kafka
+    depends_on:
+      cu-kafka-springboot-kafka-5:
+        condition: service_healthy
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # blocks until kafka is reachable
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --list
+      
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic test-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-topic --replication-factor 3 --partitions 3
+      
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --list
+      "

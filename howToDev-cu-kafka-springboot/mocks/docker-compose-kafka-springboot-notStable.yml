@@ -1,0 +1,62 @@
+version: '3.3'
+services:
+  cu-kafka-springboot-zookeeper:
+    container_name: cu-kafka-springboot-zookeeper
+    image: zookeeper:3.4.10
+    ports:
+      - "42181:2181"
+      - "42888:2888"
+      - "43888:3888"
+
+  cu-kafka-springboot-kafka-1:
+    image: wurstmeister/kafka:2.11-0.11.0.3
+    container_name: cu-kafka-springboot-kafka-1
+    ports:
+      - "19092:9092"
+    depends_on:
+      - cu-kafka-springboot-zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-1:9092,INTERNAL://cu-kafka-springboot-kafka-1:49092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092,INTERNAL://cu-kafka-springboot-kafka-1:49092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+  cu-kafka-springboot-kafka-2:
+    image: wurstmeister/kafka:2.11-0.11.0.3
+    container_name: cu-kafka-springboot-kafka-2
+    ports:
+      - "29092:9092"
+    depends_on:
+      - cu-kafka-springboot-zookeeper
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-2:9092,INTERNAL://cu-kafka-springboot-kafka-2:49092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092,INTERNAL://cu-kafka-springboot-kafka-2:49092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+  cu-kafka-springboot-kafka-3:
+    image: wurstmeister/kafka:2.11-0.11.0.3
+    container_name: cu-kafka-springboot-kafka-3
+    ports:
+      - "39092:9092"
+    depends_on:
+      - cu-kafka-springboot-zookeeper
+      - cu-kafka-springboot-kafka-1
+      - cu-kafka-springboot-kafka-2
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: 'cu-kafka-springboot-zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://cu-kafka-springboot-kafka-3:9092,INTERNAL://cu-kafka-springboot-kafka-3:49092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:39092,INTERNAL://cu-kafka-springboot-kafka-3:49092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CREATE_TOPICS: "test-topic:3:3,order-event-topic:3:3"
+
+
+
+
+

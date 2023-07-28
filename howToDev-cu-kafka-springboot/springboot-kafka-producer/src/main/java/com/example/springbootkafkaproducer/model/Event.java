@@ -8,7 +8,7 @@ import lombok.Data;
 public class Event<T,P> {
 
   long eventId;
-  T EventType;
+  T eventType;
   P payload;
 
 }

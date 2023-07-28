@@ -1,0 +1,10 @@
+#cu - application.yml
+server:
+  port: 8001
+
+spring:
+  profiles:
+    active: local
+---
+
+

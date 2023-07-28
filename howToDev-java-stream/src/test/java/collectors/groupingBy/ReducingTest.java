@@ -1,4 +1,4 @@
-package collect.groupingBy;
+package collectors.groupingBy;
 
 import java.util.List;
 import java.util.Map;
