@@ -48,34 +48,65 @@ fi
 
 if [ "$1" = "kafka" ]; then
 
+   if [ "$2" = "help" ]; then
+      echo " o mocks.bash kafka consumer [topic] [group.id]"
+      echo " o mocks.bash kafka producer [topic] [jsonFile]"
+      echo " o mocks.bash kafka {listTopics, describeTopics}"
+      echo " o mocks.bash kafka consumer-groups {all, group.id}"
+      exit
+   fi
+
    if [ "$2" = "consumer" ]; then
-   $kafkaHome/kafka-console-consumer --bootstrap-server $kafkaBootstrapServer --topic $3 --from-beginning --property "print.key=true" --property "print.value=true" --property "key.separator= : "
+     if [ "$4" = "" ]; then
+       echo "Must type group.id"
+       exit
+     fi
+
+   $kafkaHome/kafka-console-consumer --bootstrap-server $kafkaBootstrapServer --topic $3 --group $4 --from-beginning --property "print.key=true" --property "print.value=true" --property "key.separator= : "
+   exit
+   fi
+
+   if [ "$2" = "consumer-groups" ]; then
+
+      if [ "$3" = "all" ]; then
+        $kafkaHome/kafka-consumer-groups --bootstrap-server $kafkaBootstrapServer --describe --all-groups
+      else
+        $kafkaHome/kafka-consumer-groups --bootstrap-server $kafkaBootstrapServer --describe --group $3
+      fi
+
+      exit
+
    fi
 
    if [ "$2" = "producer" ]; then
    tr '\n' ' ' < $4 | $kafkaHome/kafka-console-producer --broker-list $kafkaBootstrapServer --topic $3 --property "parse.key=true" --property "key.separator=:"
+   exit
    fi
 
    if [ "$2" = "delete" ]; then
     $kafkaHome/kafka-delete-records --bootstrap-server $kafkaBootstrapServer -offset-json-file $3
+    exit
    fi
 
    if [ "$2" = "listTopics" ]; then
     $kafkaHome/kafka-topics --bootstrap-server $kafkaBootstrapServer --list
+    exit
    fi
 
    if [ "$2" = "describeTopics" ]; then
        $kafkaHome/kafka-topics --bootstrap-server $kafkaBootstrapServer --describe
+       exit
    fi
-
+   echo "Unknown options. Exiting"
    exit
 fi
 
     echo "Usage:"
-    echo " o index.bash {start, stop, status, statusAll}"
-    echo " o index.bash startColima"
-    echo " o index.bash up-no-recreate"
-    echo " o index.bash openPorts"
-    echo " o index.bash logs {container-name}"
-    echo " o index.bash kafka {consumer, producer, listTopics} [topic] [jsonFile]  / {delete} [jsonFile]  "
+    echo " o mocks.bash {start, stop, status, statusAll, down}"
+    echo " o mocks.bash startColima"
+    echo " o mocks.bash up-no-recreate"
+    echo " o mocks.bash openPorts"
+    echo " o mocks.bash logs {container-name}"
+    echo " o mocks.bash help kafka"
+
 
