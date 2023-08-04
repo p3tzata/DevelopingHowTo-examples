@@ -1,12 +1,12 @@
 #cu - kafka application settings - local profile
 spring:
   kafka:
-    producer:
+    consumer:
       bootstrap-servers: localhost:9093,localhost:9094,localhost:9095 #This is mandatory
       key-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
       value-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
-      properties:
-        retries: 15
+      group-id: springboot-kafka-consumer-annotated #This is mandatory
+
     admin:
       properties:
         bootstrap.servers: localhost:9093,localhost:9094,localhost:9095

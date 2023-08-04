@@ -75,9 +75,10 @@ public class OrderEventProducer {
 
     String key = event.getEventKey();
     String value = objectMapper.writeValueAsString(event);
-    ProducerRecord<String, String> producerRecord = buildProducerRecordWithHeader(topicName, key, value);
+    ProducerRecord<String, String> producerRecord = buildProducerRecord(topicName, key, value);
+    ProducerRecord<String, String> producerRecordWithHeader = buildProducerRecordWithHeader(topicName, key, value);
 
-    ListenableFuture<SendResult<String, String>> listenableFuture = kafkaTemplate.send(producerRecord);
+    ListenableFuture<SendResult<String, String>> listenableFuture = kafkaTemplate.send(producerRecordWithHeader);
 
     listenableFuture.addCallback(
         success -> log.info("Successfully send message with key: {}, success: {}", key, success),

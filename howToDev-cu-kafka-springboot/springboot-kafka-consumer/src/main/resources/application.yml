@@ -1,0 +1,12 @@
+#cu - application.yml
+server:
+  port: 8002
+
+spring:
+  profiles:
+    active: local
+---
+myAppSetting:
+  kafka:
+    topic: order-event-topic
+
