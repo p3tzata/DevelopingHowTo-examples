@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 
 */
-@Component
+//@Component - because we focus on OrderEventConsumerManualOffsetCommit
 @Slf4j
 public class OrderEventConsumer {
 

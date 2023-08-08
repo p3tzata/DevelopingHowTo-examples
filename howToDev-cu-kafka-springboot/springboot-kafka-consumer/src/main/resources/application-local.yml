@@ -1,11 +1,14 @@
 #cu - kafka application settings - local profile
 spring:
   kafka:
+    listener:
+      ack-mode: manual
+      concurrency: 4
     consumer:
       bootstrap-servers: localhost:9093,localhost:9094,localhost:9095 #This is mandatory
       key-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
       value-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
-      group-id: springboot-kafka-consumer-annotated #This is mandatory
+      group-id: springboot-kafka-consumer-annotated-group-id #This is mandatory
 
     admin:
       properties:

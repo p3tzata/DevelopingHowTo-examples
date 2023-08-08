@@ -1,5 +1,5 @@
 #!/bin/bash
-version=26072023
+version=08082023
 source "mocks-config.bash"
 
 if [ "$1" = "up-no-recreate" ]; then
@@ -101,12 +101,20 @@ if [ "$1" = "kafka" ]; then
    exit
 fi
 
+if [ "$1" = "activemq" ]; then
+     if [ "$2" = "help" ]; then
+        echo " o To send, view messages please use activemq web console on http://hostname:8161/admin/queues.jsp"
+        exit
+     fi
+fi
+
     echo "Usage:"
     echo " o mocks.bash {start, stop, status, statusAll, down}"
     echo " o mocks.bash startColima"
     echo " o mocks.bash up-no-recreate"
     echo " o mocks.bash openPorts"
     echo " o mocks.bash logs {container-name}"
-    echo " o mocks.bash help kafka"
+    echo " o mocks.bash kafka help"
+    echo " o mocks.bash activemq help"
 
 
