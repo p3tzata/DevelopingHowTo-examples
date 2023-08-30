@@ -1,5 +1,5 @@
 #!/bin/bash
-version=08082023
+version=30082023
 source "mocks-config.bash"
 
 if [ "$1" = "up-no-recreate" ]; then
@@ -50,7 +50,8 @@ if [ "$1" = "kafka" ]; then
 
    if [ "$2" = "help" ]; then
       echo " o mocks.bash kafka consumer [topic] [group.id]"
-      echo " o mocks.bash kafka producer [topic] [jsonFile]"
+      echo " o mocks.bash kafka producer [topic] [messageFile]"
+      echo " o mocks.bash kafka delete [configFile]"
       echo " o mocks.bash kafka {listTopics, describeTopics}"
       echo " o mocks.bash kafka consumer-groups {all, group.id}"
       exit

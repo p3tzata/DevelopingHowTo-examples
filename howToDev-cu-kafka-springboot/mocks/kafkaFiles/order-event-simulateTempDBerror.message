@@ -1,0 +1,7 @@
+1234simulateDBError-key : {
+"eventKey": "1234simulateDBError-key",
+"eventType": "create",
+"payload": {
+  "orderId": 6969,
+  "orderCode": "order code 1"
+}}

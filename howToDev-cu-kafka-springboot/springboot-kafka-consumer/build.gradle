@@ -28,11 +28,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.kafka:spring-kafka'
-	compileOnly 'org.projectlombok:lombok'
+  testImplementation 'org.projectlombok:lombok:1.18.26'
+  compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.2.0'
+	testImplementation group: 'org.awaitility', name: 'awaitility-proxy', version: '3.1.6'
 }
 
 tasks.named('test') {

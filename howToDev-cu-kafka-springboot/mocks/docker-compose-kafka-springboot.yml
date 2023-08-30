@@ -107,7 +107,16 @@ services:
       echo -e 'Creating kafka topics'
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic test-topic --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-simple-error-handler-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-retry-listener-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-not-retryable-exceptions-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-exponential-backoff-topic --replication-factor 3 --partitions 3
       
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-normal-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-normal-topic-RETRY --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-normal-topic-DLT --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-saveFailMsgToDB-topic --replication-factor 3 --partitions 3
+  
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --list
       "

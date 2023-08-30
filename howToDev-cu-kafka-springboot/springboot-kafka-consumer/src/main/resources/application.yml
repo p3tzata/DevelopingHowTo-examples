@@ -9,4 +9,29 @@ spring:
 myAppSetting:
   kafka:
     topic: order-event-topic
-
+    topicSimpleErrorHandler:
+      topicName: order-event-simple-error-handler-topic
+      retry: 4
+    topicRetryListener:
+      topicName: order-event-retry-listener-topic
+      retry: 4
+    topicNotRetryableExceptions:
+      topicName: order-event-not-retryable-exceptions-topic
+      retry: 4
+    topicExponentialBackoff:
+      topicName: order-event-exponential-backoff-topic
+      maxRetries: 3
+      initialInterval: 1000
+      multiplier: 2
+      maxInterval: 2000
+    topicRecover:
+      normal:
+        normalTopicName: order-event-normal-topic
+        retry: 3
+        intervalRetry: 1000
+      retry:
+        retryTopicName: order-event-normal-topic-RETRY
+      dtl:
+        deadLetterTopicName: order-event-normal-topic-DLT
+    topicSaveFailMsgToDB:
+      topicName: order-event-saveFailMsgToDB-topic

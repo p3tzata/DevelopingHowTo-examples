@@ -1,0 +1,7 @@
+1234simulateFatalError-key : {
+"eventKey": "1234simulateFatalError-key",
+"eventType": "create",
+"payload": {
+  "orderId": 123,
+  "orderCode": null
+}}

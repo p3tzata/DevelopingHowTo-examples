@@ -1,7 +1,7 @@
-# Mocks
+## Mocks
 Ref to `mocks/readMe.md`
 
-# Producer
+## Producer
 - `POST http://localhost:8001/order/vN/event - v1, v2 ... vN.
 - `POST http://localhost:8001/order/v1/event`
   - curl --location 'http://localhost:8001/order/v1/event' \
@@ -15,7 +15,8 @@ Ref to `mocks/readMe.md`
     }
     }'
 
+## H2 Console - `http://localhost:8002/h2-console/`
 
-# Other
+## Other
  - Intellij idea - enable annotation processing
 

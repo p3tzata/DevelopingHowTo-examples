@@ -1,15 +1,15 @@
 {
   "partitions": [
     {
-      "topic": "test-topic",
+      "topic": "order-event-saveFailMsgToDB-topic",
       "partition": 0,
       "offset": -1
     },{
-      "topic": "test-topic",
+      "topic": "order-event-saveFailMsgToDB-topic",
       "partition": 1,
       "offset": -1
     },{
-      "topic": "test-topic",
+      "topic": "order-event-saveFailMsgToDB-topic",
       "partition": 2,
       "offset": -1
     }],
