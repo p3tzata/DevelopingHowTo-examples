@@ -105,8 +105,8 @@ services:
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --list
       
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic test-topic --replication-factor 3 --partitions 3
-      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-topic --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic test-topic --replication-factor 3 --partitions 3 
+      kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-topic --replication-factor 3 --partitions 3 --config min.insync.replicas=2
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-simple-error-handler-topic --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-retry-listener-topic --replication-factor 3 --partitions 3
       kafka-topics --bootstrap-server cu-kafka-springboot-kafka-5:29095 --create --if-not-exists --topic order-event-not-retryable-exceptions-topic --replication-factor 3 --partitions 3

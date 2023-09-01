@@ -82,7 +82,10 @@ public class OrderEventProducer {
 
     listenableFuture.addCallback(
         success -> log.info("Successfully send message with key: {}, success: {}", key, success),
-        error -> log.info("Error send message with key: {}, error: {}", key, error));
+        error -> {
+          //SAVE TO DB. AND JOB WILL TRY TO RESEND.
+          log.info("Error send message with key: {}, error: {}", key, error);
+        });
 
   }
 
