@@ -56,4 +56,14 @@ public class Author {
 
     return Objects.hash(name);
   }
+
+  @Override
+  public String toString() {
+
+    return "Author{" +
+        "name='" + name + '\'' +
+        ", comments=" + comments +
+        ", favoriteComment='" + favoriteComment + '\'' +
+        '}';
+  }
 }
