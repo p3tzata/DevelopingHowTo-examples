@@ -1,0 +1,24 @@
+server:
+  port: 8002
+---
+spring:
+  profiles:
+    active: local
+---
+myAppSetting:
+  kafka:
+    consumer:
+      klcN1:
+        topic-name: order-event-klc-n1-topic
+        group-id: springboot-kafka-consumer-klc-n1-group-id
+        auto-offset-reset-config : "earliest"
+        concurrency: 1
+        numRetry: 10
+        waitBetweenRetriesMs: 1000
+      klcN2:
+        topic-name: order-event-klc-n2-topic
+        group-id: springboot-kafka-consumer-klc-n2-group-id
+        auto-offset-reset-config : "latest"
+        concurrency: 1
+        numRetry: 10
+        waitBetweenRetriesMs: 1000

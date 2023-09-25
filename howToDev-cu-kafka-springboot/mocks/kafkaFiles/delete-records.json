@@ -1,0 +1,52 @@
+{
+  "partitions": [
+    {
+      "topic": "order-event-saveFailMsgToDB-topic",
+      "partition": 0,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-saveFailMsgToDB-topic",
+      "partition": 1,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-saveFailMsgToDB-topic",
+      "partition": 2,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n1-topic",
+      "partition": 0,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n1-topic",
+      "partition": 1,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n1-topic",
+      "partition": 2,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n2-topic",
+      "partition": 0,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n2-topic",
+      "partition": 1,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n2-topic",
+      "partition": 2,
+      "offset": -1
+    }
+  ],
+  "version": 1
+}
+
+

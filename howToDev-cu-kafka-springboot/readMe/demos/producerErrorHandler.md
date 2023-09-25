@@ -53,7 +53,7 @@
 
 # Help
 - DB - `http://localhost:8002/h2-console/`
-- Delete message in topic - `./mocks.bash kafka delete kafkaFiles/delete-records.message`
+- Delete message in topic - `./mocks.bash kafka delete kafkaFiles/delete-records.json`
 - Post body for sending message via postman
   ```json
   {
