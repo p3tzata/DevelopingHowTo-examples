@@ -1,3 +1,6 @@
+# Depends:
+- mocks
+
 # See
 ### Configuration
 
