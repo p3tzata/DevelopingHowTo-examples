@@ -42,12 +42,22 @@
   - in `app` console that messages are received.
   - count received message - `SELECT * FROM ORDER_ENTITY`
 
-### Manual test - reread from beginning validate once rereading
+### Manual test - reread from beginning - validate once rereading
 - trigger:
-  - perform previous manual test but: 
+  - perform first manual test but: 
     - change `LAST_RESET_OFFSET_TAG` in `data.sql` to be large or equal to `myAppSetting.kafka.consumer.klcN2.reset-offset-tag`
 - observe:
   - no rereading
+
+
+### Manual test - reread from beginning - no changes in `CURRENT-OFFSET` and `LOG-END-OFFSET` while rereading
+- trigger:
+  - perform first manual test but:
+   - set breakpoint at the end of the `com.example.springkafkaconsumerkafkalistenerconfigurer.service.OrderService.processConsumerRecord`
+- observe
+  - no changes in `CURRENT-OFFSET` and `LOG-END-OFFSET` while rereading
+    - `./mocks.bash kafka consumer-groups springboot-kafka-consumer-klc-n2-group-id`
+
 
 # Help
 - DB - `http://localhost:8002/h2-console/`
