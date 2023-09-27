@@ -23,4 +23,4 @@
 
 
 # Help
-- DB - `http://localhost:XXXX/h2-console/`
+- DB - `http://localhost:8002/h2-console/`

@@ -15,5 +15,13 @@ public class KafkaConsumerProperties {
   private int numRetry;
   private long waitBetweenRetriesMs;
   private String autoOffsetResetConfig;
+  private boolean resetOffset;
+  /**
+   *<pre>
+   *   Suggest to use dateFormat('YYYYMMDD').N, to avoid resetting(rereading) in unexpected app restart or double rereading.
+   *   i.e. 20230927 or 20230927.1,20230927.2 if you need two or more resetOffset in one day.
+   *</pre>
+   */
+  private double resetOffsetTag;
 
 }

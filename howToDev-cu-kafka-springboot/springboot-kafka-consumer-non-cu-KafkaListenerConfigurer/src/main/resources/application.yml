@@ -15,6 +15,8 @@ myAppSetting:
         concurrency: 1
         numRetry: 10
         waitBetweenRetriesMs: 1000
+        reset-offset: false
+        reset-offset-tag: 0
       klcN2:
         topic-name: order-event-klc-n2-topic
         group-id: springboot-kafka-consumer-klc-n2-group-id
@@ -22,3 +24,5 @@ myAppSetting:
         concurrency: 1
         numRetry: 10
         waitBetweenRetriesMs: 1000
+        reset-offset: false
+        reset-offset-tag: 0
