@@ -27,6 +27,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
@@ -43,6 +45,8 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource(properties = {"spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
     "spring.kafka.admin.properties.bootstrap.servers=${spring.embedded.kafka.brokers}"})
 class OrderEventControllerTest {
+  @Autowired
+  private KafkaTemplate kafkaTemplate;
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -66,8 +70,13 @@ class OrderEventControllerTest {
 
   @AfterEach
   void tearDown() {
-
+    //Close consumer
     consumer.close();
+
+    //Close producer
+    DefaultKafkaProducerFactory defaultProducer = (DefaultKafkaProducerFactory) kafkaTemplate.getProducerFactory();
+    defaultProducer.setPhysicalCloseTimeout(0);
+    defaultProducer.destroy();
 
   }
 

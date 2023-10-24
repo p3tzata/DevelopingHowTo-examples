@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.MessageListenerContainer;
 import org.springframework.kafka.support.Acknowledgment;
@@ -114,6 +115,11 @@ public class CommonErrorHandlerIntegrationTest {
   void tearDown() {
 
     orderRepository.deleteAll();
+
+    //Close producer
+    DefaultKafkaProducerFactory defaultProducer = (DefaultKafkaProducerFactory) kafkaTemplate.getProducerFactory();
+    defaultProducer.setPhysicalCloseTimeout(0);
+    defaultProducer.destroy();
   }
 
   @Test

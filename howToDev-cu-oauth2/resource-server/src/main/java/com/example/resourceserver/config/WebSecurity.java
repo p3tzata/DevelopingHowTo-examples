@@ -42,11 +42,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         .jwt()// you are telling Spring Security that your resource server should expect JWTs as the access token format for requests that require authentication.
         .jwtAuthenticationConverter(jwtConverter); //Register our jwtConverter
 //#cu CORS
-// http.cors();
+ http.cors();
   }
 
   //#cu CORS configuration
-  //@Bean
+  @Bean
   CorsConfigurationSource corsConfigurationSource() {
     /**
      * Because our SPA app has different origin { http://localhost:8007(spa) <==> http://127.0.0.1:8002(api) }
@@ -55,7 +55,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
      *  Cors must be configured either on API gateway or resource-server - not on both.
     */
     CorsConfiguration corsConfiguration = new CorsConfiguration();
-    corsConfiguration.setAllowedOrigins(List.of("http://localhost:8007"));
+    corsConfiguration.setAllowedOrigins(List.of("http://localhost:8007","http://localhost:4200"));
     corsConfiguration.setAllowedHeaders(List.of("*"));
     corsConfiguration.setAllowedMethods(List.of("GET"));
     UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
