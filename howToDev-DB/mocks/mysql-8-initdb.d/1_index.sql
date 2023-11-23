@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS simple_demo;
+CREATE DATABASE IF NOT EXISTS command_line_isolation;
+CREATE DATABASE IF NOT EXISTS performance_demo;

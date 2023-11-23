@@ -22,7 +22,7 @@ Would it be bad if someone were to INSERT a new row into your data while your tr
 |-----------------------|----------------------------------------------------------------------------|
 | begin;                | begin;                                                                     |
 | select * from orders; |                                                                            |
-|                       | insert into orders(9, 'order9'); # trx_state: LOCK WAIT                    |
+|                       | insert into orders(99, 'order99'); # trx_state: LOCK WAIT                  |
 |                       | ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction |
 | commit; #release lock |                                                                            |
 
