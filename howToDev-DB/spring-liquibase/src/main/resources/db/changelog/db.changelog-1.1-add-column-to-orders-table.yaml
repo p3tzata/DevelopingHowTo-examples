@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - preConditions:
+  - changeSet:
+      id: 1.1
+      author: me
+      tagDatabase:
+        tag: "version_1.1"
+      preConditions:
+        onFail: "CONTINUE"
+        not:
+          columnExists:
+            tableName: orders
+            columnName: order_status
+      changes:
+        - addColumn:
+            tableName: orders
+            columns:
+              - column:
+                  name: order_status
+                  type: varchar(45)
+      rollback:
+        - dropColumn:
+            tableName: orders
+            columnName: order_status

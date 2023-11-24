@@ -31,4 +31,4 @@ You will never found phantoms on InnoDB mysql with read commited or more restric
 
 # Help
 
-- DB - `/usr/local/mysql/bin/mysql -h 127.0.0.1 -P 3007 -u root -p command-line-isolation`
+- DB - `/usr/local/mysql/bin/mysql -h 127.0.0.1 -P 3007 -u root -p command_line_isolation`

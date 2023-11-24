@@ -32,4 +32,4 @@ Would it be bad if someone were to INSERT a new row into your data while your tr
 
 # Help
 
-- DB - `/usr/local/mysql/bin/mysql -h 127.0.0.1 -P 3007 -u root -p command-line-isolation`
+- DB - `/usr/local/mysql/bin/mysql -h 127.0.0.1 -P 3007 -u root -p command_line_isolation`

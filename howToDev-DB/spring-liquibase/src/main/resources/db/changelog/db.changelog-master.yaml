@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-1.0-create-orders-table.yaml
+  - include:
+      file: db/changelog/db.changelog-1.1-add-column-to-orders-table.yaml
+  - include:
+      file: db/changelog/db.changelog-1.2-create-customers-table.yaml
+

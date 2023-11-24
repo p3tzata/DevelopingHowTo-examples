@@ -1,17 +1,17 @@
 databaseChangeLog:
  - changeSet:
-    id: 1.0
+    id: 1.2
     preConditions:
-      onFail: "MARK_RAN"
+      onFail: "CONTINUE"
       not:
         tableExists:
-          tableName: orders
+          tableName: customers
     author: me
     tagDatabase:
-      tag: "version_1.0"
+      tag: "version_1.2"
     changes:
       - createTable:
-          tableName: orders
+          tableName: customers
           columns:
             - column:
                 name: id
@@ -20,10 +20,10 @@ databaseChangeLog:
                   primaryKey: true
                   nullable: false
             - column:
-                name: order_code
+                name: customer_code
                 type: text
                 constraints:
                   nullable: false
     rollback:
       - dropTable:
-          tableName: "orders"
+          tableName: "customers"
