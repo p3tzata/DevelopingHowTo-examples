@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  spring-misc-mysql-8:
+    container_name: spring-misc-mysql-8
+    image: mysql:8.0
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0 --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql-8-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3008:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+  spring-misc-postgres-16:
+    image: postgres:16
+    container_name: spring-misc-postgres-16
+   # restart: unless-stopped
+    ports:
+      - "15432:5432"
+    volumes:
+     - ./postgres-16-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+
+

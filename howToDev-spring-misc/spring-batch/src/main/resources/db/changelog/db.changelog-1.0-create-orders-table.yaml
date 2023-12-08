@@ -1,0 +1,40 @@
+databaseChangeLog:
+ - changeSet:
+    id: 1.0
+    preConditions:
+      onFail: "MARK_RAN"
+      not:
+        tableExists:
+          tableName: orders
+    author: me
+    tagDatabase:
+      tag: "version_1.0"
+    changes:
+      - createTable:
+          tableName: orders
+          columns:
+            - column:
+                name: id
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: order_id
+                type: int
+                constraints:
+                  nullable: false
+            - column:
+                name: order_code
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: created_on
+                type: datetime(6)
+                constraints:
+                  nullable: false
+    rollback:
+      - dropTable:
+          tableName: "orders"
