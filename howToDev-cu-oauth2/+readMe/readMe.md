@@ -28,7 +28,7 @@ search for '#' in src/
 # Eureka-discovery-client
 - `@EnableDiscoveryClient`
 - `eureka.client.service-url.defaultZone=http://localhost:8004/eureka` - config for client
-- `eureka.instance.instance-id==${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}`
+- `eureka.instance.instance-id=${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}`
 - `lb://resource-server` - to address some other eureka client
 
 # Spa-jquery

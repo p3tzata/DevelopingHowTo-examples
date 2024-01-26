@@ -1,0 +1,7 @@
+1234simulateFatalInfinityError-key : {
+"eventKey": "1234simulateFatalInfinityError-key",
+"eventType": "create",
+"payload": {
+  "orderId": 86969,
+  "orderCode": "order code 86969"
+}}

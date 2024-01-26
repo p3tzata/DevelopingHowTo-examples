@@ -1,0 +1,27 @@
+{
+  "partitions": [
+    {
+      "topic": "order-event-klc-n1-topic",
+      "partition": 0,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n1-topic",
+      "partition": 1,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n2-topic",
+      "partition": 0,
+      "offset": -1
+    },
+    {
+      "topic": "order-event-klc-n2-topic",
+      "partition": 1,
+      "offset": -1
+    }
+  ],
+  "version": 1
+}
+
+

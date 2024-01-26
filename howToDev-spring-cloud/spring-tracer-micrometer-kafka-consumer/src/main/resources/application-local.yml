@@ -1,0 +1,28 @@
+spring:
+  kafka:
+    listener:
+      ack-mode: manual
+    consumer:
+      bootstrap-servers: localhost:9096 #This is mandatory
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
+    producer:
+      bootstrap-servers: localhost:9096 #This is mandatory
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #This is mandatory
+    admin:
+      properties:
+        bootstrap.servers: localhost:9096
+  datasource:
+    url: jdbc:h2:mem:testdb;
+    driver-class-name: org.h2.Driver
+    #username: root
+    #password: 123456
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    defer-datasource-initialization: true #because we use seeding via ..src/main/resources/data.sql
+  h2:
+    console:
+      enabled: true
