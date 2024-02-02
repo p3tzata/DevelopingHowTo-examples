@@ -1,6 +1,62 @@
 version: '2.3'
 
 services:
+  spring-cloud-mysql-keycloak:
+    container_name: spring-cloud-mysql-keycloak
+    image: mysql:8.0
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0 --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql-keycloak-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3008:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=auth_service
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=123456
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  spring-cloud-keycloak:
+    healthcheck:
+      test: ["CMD-SHELL",  "curl --fail http://localhost:8080/auth/health/ready || exit -1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    container_name: spring-cloud-keycloak
+    image: quay.io/keycloak/keycloak:18.0.0
+    restart: always
+    command: start-dev
+    ports:
+      - "8002:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: 123456
+      KC_HTTP_RELATIVE_PATH: auth
+      # KC_LOG_LEVEL: debug
+      KC_FEATURES:
+        authorization
+        token-exchange
+        docker
+        impersonation
+        scripts
+        web-authn
+        client-policies
+        dynamic-scopes
+      KC_DB: mysql
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: 123456
+      KC_DB_URL: jdbc:mysql://spring-cloud-mysql-keycloak/auth_service
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+    depends_on:
+      spring-cloud-mysql-keycloak:
+        condition: service_healthy
+
   spring-cloud-zookeeper:
     healthcheck:
       test: ["CMD-SHELL",  "/usr/bin/nc -z localhost 2181 || exit -1"]
@@ -18,7 +74,6 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: spring-cloud-zookeeper:2888:3888
-
   spring-cloud-kafka-6:
     healthcheck:
       test: ["CMD", "kafka-topics", "--bootstrap-server", "spring-cloud-kafka-6:9096", "--list"]
@@ -43,8 +98,6 @@ services:
     depends_on:
       spring-cloud-zookeeper:
         condition: service_healthy
-
-
   spring-cloud-init-kafka:
     image: confluentinc/cp-kafka:7.3.3
     hostname: spring-cloud-init-kafka

@@ -4,6 +4,8 @@ server:
   port: 8004
 
 eureka:
+  instance:
+    hostname: localhost
   client:
     register-with-eureka: false # false mean to not register itself to discover-server.
                                 # Apart from this we have only one instance of discovery_server.

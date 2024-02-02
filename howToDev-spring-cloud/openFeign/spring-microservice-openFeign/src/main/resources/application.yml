@@ -1,0 +1,28 @@
+
+spring:
+  cloud:
+    openfeign:
+      oauth2:
+        clientRegistrationId: my-microservice-openfeign-regId
+        enabled: true
+      #ReadMe: to support FeignContentGzipEncodingInterceptor
+      compression:
+        request:
+          enabled: true
+          mime-types: text/xml, application/xml, application/json
+          min-request-size: ${MIN_REQUEST_BYTES_COMPRESSION:2048}
+        response:
+          enabled: true
+---
+spring:
+ security:
+  oauth2:
+   client:
+     registration:
+       my-microservice-openfeign-regId:
+        authorization-grant-type: client_credentials
+        client-id: my-microservice-openfeign
+        client-secret: LUxRZtb7Bpq4bu3gYHqNOb2DRJPlLwUT
+     provider:
+       my-microservice-openfeign-regId:
+         token-uri: http://localhost:8002/auth/realms/myRealm/protocol/openid-connect/token

@@ -11,8 +11,13 @@ import com.example.springkafkaconsumer.persistence.order.repository.OrderReposit
 import com.example.springkafkaconsumer.service.OrderService;
 import com.example.springkafkaconsumer.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.common.errors.UnknownTopicOrPartitionException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,6 +62,8 @@ public class ConsumerIntegrationTest {
   @SpyBean
   OrderService orderServiceSpy;
 
+  @Autowired
+  private AdminClient adminClient;
   @BeforeEach
   void setUp() {
 
@@ -80,6 +87,19 @@ public class ConsumerIntegrationTest {
     DefaultKafkaProducerFactory defaultProducer = (DefaultKafkaProducerFactory) kafkaTemplate.getProducerFactory();
     defaultProducer.setPhysicalCloseTimeout(0);
     defaultProducer.destroy();
+
+    //Delete topic
+    try {
+      adminClient.deleteTopics(List.of("order-event-topic")).all().get(60, TimeUnit.SECONDS);
+    }
+    catch (InterruptedException | TimeoutException e) {
+      throw new RuntimeException(e);
+    }
+    catch (ExecutionException e) {
+      if (!(e.getCause() instanceof UnknownTopicOrPartitionException)) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   @Test

@@ -1,48 +1,50 @@
 package collectors.groupingBy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.example.model.Stock;
 import org.junit.jupiter.api.Test;
 
-public class ReducingTest {
+public class CountingTest {
 
   @Test
-  void reducing(){
+  void counting() {
 
-    Stock stock = new Stock("111", 6, "pc");
-    Stock stock2 = new Stock("111", 8, "pc");
-    Stock stock3 = new Stock("222", 10, "pc");
+    List<Stock> list = List.of(
+        new Stock("111", 8, "pc"),
+        new Stock("111", 8, "pc"),
+        new Stock("111", 8, "gm"),
+        new Stock("222", 10, "gm"),
+        new Stock("222", 10, "gm"),
+        new Stock("222", 10, "gm"),
+        new Stock("222", 10, "pc"),
+        new Stock("222", 10, "pc")
+    );
 
-    List<Stock> list = List.of(stock, stock2, stock3);
-
-    Map<String, Stock> collected = list.parallelStream().collect(Collectors.groupingBy(
+    Map<String, Map<String, Long>> collected = list.parallelStream().collect(Collectors.groupingBy(
         Stock::getArticleNo,
-        getReducingCollector()));
+        Collectors.groupingBy(Stock::getUom, Collectors.counting())));
 
-    System.out.print(collected.toString());
+    System.out.println("Collected" + collected.toString());
+    System.out.println("");
+    collected.entrySet().stream().forEach(es ->
+    {
+      System.out.println("Sorting " + es.getKey());
+      ArrayList<Entry<String, Long>> entries = new ArrayList<>(es.getValue().entrySet());
+      System.out.println("Before Sorting" + entries.toString());
+
+      entries.sort(Entry.<String, Long>comparingByValue().reversed());
+
+      System.out.println("After Sorting" + entries.toString());
+      System.out.println("");
+    });
+
 
   }
-  private static Collector<Stock, ?, Stock> getReducingCollector() {
 
-    return Collectors.reducing(
-        new Stock(null, 0, null),
-        (x1, x2) -> {
-
-          if (x1.getArticleNo() == null) {
-            return x2;
-          }
-
-          if (x2.getArticleNo() == null) {
-            return x1;
-          }
-
-          x1.setQtty(x1.getQtty() + x2.getQtty());
-
-          return x1;
-        });
-  }
 
 }

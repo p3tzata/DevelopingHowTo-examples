@@ -12,13 +12,18 @@ import com.example.springkafkaconsumer.service.OrderService;
 import com.example.springkafkaconsumer.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.common.errors.UnknownTopicOrPartitionException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -89,6 +94,8 @@ public class RecoverConsumerIntegrationTest {
   @SpyBean
   OrderService orderServiceSpy;
 
+  @Autowired
+  private AdminClient adminClient;
 
   @BeforeEach
   void setUp() {
@@ -116,6 +123,19 @@ public class RecoverConsumerIntegrationTest {
     DefaultKafkaProducerFactory defaultProducer = (DefaultKafkaProducerFactory) kafkaTemplate.getProducerFactory();
     defaultProducer.setPhysicalCloseTimeout(0);
     defaultProducer.destroy();
+
+    //Delete topic
+    try {
+      adminClient.deleteTopics(List.of("order-event-topic")).all().get(60, TimeUnit.SECONDS);
+    }
+    catch (InterruptedException | TimeoutException e) {
+      throw new RuntimeException(e);
+    }
+    catch (ExecutionException e) {
+      if (!(e.getCause() instanceof UnknownTopicOrPartitionException)) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   @Test

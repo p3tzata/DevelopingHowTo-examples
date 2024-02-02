@@ -32,3 +32,4 @@
 
 - DB - `/usr/local/mysql/bin/mysql -h 127.0.0.1 -P 3007 -u root -p command_line_isolation`
 - observe transactions - `SELECT trx_state, trx_isolation_level FROM information_schema.innodb_trx;`
+- observe locks - ` SELECT OBJECT_SCHEMA, OBJECT_NAME, LOCK_Type, LOCK_MODE, LOCK_DATA  FROM performance_schema.data_locks t`

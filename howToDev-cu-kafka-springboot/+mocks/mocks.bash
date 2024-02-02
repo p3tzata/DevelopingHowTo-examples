@@ -1,6 +1,11 @@
 #!/bin/bash
-version=30082023
+version=20112023
 source "mocks-config.bash"
+
+if [ "$1" = "prune" ]; then
+    docker "$2" prune
+    exit
+fi
 
 if [ "$1" = "up-no-recreate" ]; then
     docker-compose -f $dockerComposeFile up --no-recreate
@@ -113,6 +118,7 @@ fi
     echo " o mocks.bash {start, stop, status, statusAll, down}"
     echo " o mocks.bash startColima"
     echo " o mocks.bash up-no-recreate"
+    echo " o mocks.bash prune {volume}"
     echo " o mocks.bash openPorts"
     echo " o mocks.bash logs {container-name}"
     echo " o mocks.bash kafka help"

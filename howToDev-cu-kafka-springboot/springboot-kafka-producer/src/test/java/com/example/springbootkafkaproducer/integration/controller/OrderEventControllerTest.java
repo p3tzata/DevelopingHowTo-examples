@@ -6,11 +6,17 @@ import com.example.springbootkafkaproducer.model.Order;
 import com.example.springbootkafkaproducer.model.OrderEventType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.apache.catalina.filters.AddDefaultCharsetFilter.ResponseWrapper;
+import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.common.errors.UnknownTopicOrPartitionException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -54,6 +60,9 @@ class OrderEventControllerTest {
   @Autowired
   private EmbeddedKafkaBroker embeddedKafkaBroker;
 
+  @Autowired
+  private AdminClient adminClient;
+
   private Consumer<String, String> consumer;
 
   @BeforeEach
@@ -78,6 +87,18 @@ class OrderEventControllerTest {
     defaultProducer.setPhysicalCloseTimeout(0);
     defaultProducer.destroy();
 
+    //Delete topic
+    try {
+      adminClient.deleteTopics(List.of("order-event-topic")).all().get(60, TimeUnit.SECONDS);
+    }
+    catch (InterruptedException | TimeoutException e) {
+      throw new RuntimeException(e);
+    }
+    catch (ExecutionException e) {
+      if (!(e.getCause() instanceof UnknownTopicOrPartitionException)) {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   @Test
