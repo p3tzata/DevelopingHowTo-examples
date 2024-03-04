@@ -33,6 +33,9 @@ public class MyContainerFactoryCustomizer {
         container -> {
           container.getContainerProperties().setAuthExceptionRetryInterval(Duration.ofMillis(authExceptionRetryInterval));
 
+          //readMe: Enable Consumer TraceId and SpanId in log.
+          container.getContainerProperties().setObservationEnabled(true);
+
           String[] containerTopics = container.getContainerProperties().getTopics();
           if (containerTopics.length != 1) {
             throw new IllegalStateException(
@@ -51,6 +54,7 @@ public class MyContainerFactoryCustomizer {
           //handler.addRetryableExceptions();
 
           container.setCommonErrorHandler(handler);
+
         });
 
   }

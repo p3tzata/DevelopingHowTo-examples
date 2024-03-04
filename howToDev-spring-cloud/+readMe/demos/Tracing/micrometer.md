@@ -1,5 +1,5 @@
 # Depends:
-- `howToDev-spring-cloud/spring-tracer-micormeter`
+- `howToDev-spring-cloud/tracer/spring-tracer-micormeter`
 
 # See
 ### Configuration

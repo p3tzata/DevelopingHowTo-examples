@@ -25,19 +25,29 @@ ext {
   set('springCloudVersion', "2023.0.0")
 }
 
+//readMe: dependencies
 dependencies {
 
-  //ReadMe: Core support
+  //handle http request to me(spring-microservice-openFeign).
   implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+  implementation 'org.springframework.security:spring-security-oauth2-jose:6.1.2'
+
+  //Feign Core support
   implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
   implementation group: 'io.github.openfeign', name: 'feign-jackson', version: 13.1
   implementation group: 'io.github.openfeign', name: 'feign-httpclient', version: 13.1
 
-  //ReadMe: OAuth2 support
+  //Feign OAuth2 support
   implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
 
-
+  //Feign Testing
+  testImplementation group: 'io.github.openfeign', name: 'feign-mock', version: 13.1
+  testImplementation group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock', version: '4.0.4'
+  implementation 'org.testcontainers:testcontainers-bom:1.19.5'
+  testImplementation 'com.github.dasniko:testcontainers-keycloak:3.2.0'
+  testAnnotationProcessor group: 'org.projectlombok', name: 'lombok'
 
   compileOnly 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'

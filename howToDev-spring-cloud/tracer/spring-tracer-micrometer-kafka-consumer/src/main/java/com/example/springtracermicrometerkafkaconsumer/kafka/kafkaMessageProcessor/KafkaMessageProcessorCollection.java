@@ -9,23 +9,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaMessageProcessorCollection {
 
-  private List<KafkaMessageProcessor> kafkaMessageProcessorList;
-  private Map<String, KafkaMessageProcessor> kafkaMessageProcessorMap = new HashMap<>();
+  private List<MyKafkaMessageProcessor> myKafkaMessageProcessorList;
+  private Map<String, MyKafkaMessageProcessor> kafkaMessageProcessorMap = new HashMap<>();
 
   @Autowired
-  public KafkaMessageProcessorCollection(List<KafkaMessageProcessor> kafkaMessageProcessorList) {
+  public KafkaMessageProcessorCollection(List<MyKafkaMessageProcessor> myKafkaMessageProcessorList) {
 
-    this.kafkaMessageProcessorList = kafkaMessageProcessorList;
+    this.myKafkaMessageProcessorList = myKafkaMessageProcessorList;
 
     seed();
   }
 
   private void seed() {
 
-    kafkaMessageProcessorList.stream().forEach(x -> kafkaMessageProcessorMap.put(x.getTopicName(), x));
+    myKafkaMessageProcessorList.stream().forEach(x -> kafkaMessageProcessorMap.put(x.getTopicName(), x));
   }
 
-  public KafkaMessageProcessor getKafkaMessageProcessor(String topicName) {
+  public MyKafkaMessageProcessor getKafkaMessageProcessor(String topicName) {
 
     return kafkaMessageProcessorMap.get(topicName);
   }

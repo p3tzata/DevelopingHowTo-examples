@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  //readMe: 'io.micrometer:micrometer-tracing-bridge-brave' is needed for traceId and spanId
   implementation 'io.micrometer:micrometer-tracing-bridge-brave'
   implementation 'org.springframework.kafka:spring-kafka'
 

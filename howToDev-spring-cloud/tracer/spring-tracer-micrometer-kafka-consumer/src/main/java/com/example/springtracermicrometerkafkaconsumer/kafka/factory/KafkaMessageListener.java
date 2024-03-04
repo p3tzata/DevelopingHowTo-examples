@@ -1,6 +1,6 @@
 package com.example.springtracermicrometerkafkaconsumer.kafka.factory;
 
-import com.example.springtracermicrometerkafkaconsumer.kafka.kafkaMessageProcessor.KafkaMessageProcessor;
+import com.example.springtracermicrometerkafkaconsumer.kafka.kafkaMessageProcessor.MyKafkaMessageProcessor;
 import com.example.springtracermicrometerkafkaconsumer.kafka.properties.KafkaConsumerProperties;
 import com.example.springtracermicrometerkafkaconsumer.kafka.service.ResetOffsetService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,14 +15,14 @@ import org.springframework.kafka.support.Acknowledgment;
 @Slf4j
 public class KafkaMessageListener implements AcknowledgingMessageListener<String, String>, ConsumerSeekAware {
 
-  private KafkaMessageProcessor kafkaMessageProcessor;
+  private MyKafkaMessageProcessor myKafkaMessageProcessor;
   private ResetOffsetService resetOffsetService;
   private KafkaConsumerProperties properties;
 
-  public KafkaMessageListener(KafkaMessageProcessor kafkaMessageProcessor, ResetOffsetService resetOffsetService,
+  public KafkaMessageListener(MyKafkaMessageProcessor myKafkaMessageProcessor, ResetOffsetService resetOffsetService,
       KafkaConsumerProperties properties) {
 
-    this.kafkaMessageProcessor = kafkaMessageProcessor;
+    this.myKafkaMessageProcessor = myKafkaMessageProcessor;
     this.resetOffsetService = resetOffsetService;
     this.properties = properties;
   }
@@ -32,7 +32,7 @@ public class KafkaMessageListener implements AcknowledgingMessageListener<String
 
     log.info("Receiving message, topic:{}, key:{}", data.topic(), data.key());
     try {
-      kafkaMessageProcessor.process(data);
+      myKafkaMessageProcessor.process(data);
     }
     catch (JsonProcessingException e) {
       throw new RuntimeException(e);

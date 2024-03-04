@@ -1,6 +1,6 @@
 package com.example.springtracermicrometerkafkaconsumer.kafka.factory;
 
-import com.example.springtracermicrometerkafkaconsumer.kafka.kafkaMessageProcessor.KafkaMessageProcessor;
+import com.example.springtracermicrometerkafkaconsumer.kafka.kafkaMessageProcessor.MyKafkaMessageProcessor;
 import com.example.springtracermicrometerkafkaconsumer.kafka.kafkaMessageProcessor.KafkaMessageProcessorCollection;
 import com.example.springtracermicrometerkafkaconsumer.kafka.properties.KafkaConsumerProperties;
 import com.example.springtracermicrometerkafkaconsumer.kafka.service.ResetOffsetService;
@@ -23,10 +23,10 @@ public class KafkaMessageListenerFactory {
 
   public KafkaMessageListener getMessageListener(KafkaConsumerProperties properties) {
 
-    KafkaMessageProcessor kafkaMessageProcessor = kafkaMessageProcessorCollection.getKafkaMessageProcessor(
+    MyKafkaMessageProcessor myKafkaMessageProcessor = kafkaMessageProcessorCollection.getKafkaMessageProcessor(
         properties.getTopicName());
 
-    return new KafkaMessageListener(kafkaMessageProcessor, resetOffsetService, properties);
+    return new KafkaMessageListener(myKafkaMessageProcessor, resetOffsetService, properties);
 
   }
 

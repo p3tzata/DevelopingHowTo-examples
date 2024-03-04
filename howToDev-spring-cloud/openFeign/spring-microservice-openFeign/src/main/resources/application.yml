@@ -1,8 +1,13 @@
+#ReadMe: application.yml(openFeign)
 
+server:
+  port: 8010
+---
 spring:
   cloud:
     openfeign:
       oauth2:
+        # clientRegistrationId must be some in spring.security.oauth2.client.{registration,provider}
         clientRegistrationId: my-microservice-openfeign-regId
         enabled: true
       #ReadMe: to support FeignContentGzipEncodingInterceptor
@@ -10,7 +15,7 @@ spring:
         request:
           enabled: true
           mime-types: text/xml, application/xml, application/json
-          min-request-size: ${MIN_REQUEST_BYTES_COMPRESSION:2048}
+          min-request-size: 2048
         response:
           enabled: true
 ---
@@ -25,4 +30,22 @@ spring:
         client-secret: LUxRZtb7Bpq4bu3gYHqNOb2DRJPlLwUT
      provider:
        my-microservice-openfeign-regId:
-         token-uri: http://localhost:8002/auth/realms/myRealm/protocol/openid-connect/token
+         token-uri: http://localhost:8008/auth/realms/myRealm/protocol/openid-connect/token
+---
+#only to handle authorization on myself controllers(like my OrderController).
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+         issuer-uri: http://localhost:8008/auth/realms/myRealm
+---
+myFeign:
+  rest-servers:
+    spring-microservice-webserver:
+      url: "http://localhost:8009"
+---
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework: DEBUG

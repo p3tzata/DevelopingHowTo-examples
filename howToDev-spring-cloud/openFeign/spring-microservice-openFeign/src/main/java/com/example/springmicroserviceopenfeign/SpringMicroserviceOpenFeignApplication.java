@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-
 public class SpringMicroserviceOpenFeignApplication {
 
   public static void main(String[] args) {

@@ -1,11 +1,11 @@
 ## Keycloak:
-`http://127.0.0.1:8002/auth u:admin,p:123456`
+`http://127.0.0.1:8008/auth u:admin,p:123456`
 <br><br>
 `Some user in MyRealm: u:my-appuser, p:123456`
 
 To get Access token:<br>
 ````
-curl --location 'http://localhost:8002/auth/realms/MyRealm/protocol/openid-connect/token' \
+curl --location 'http://localhost:8008/auth/realms/MyRealm/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=password' \
 --data-urlencode 'username=my-appuser' \

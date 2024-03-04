@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: local
+---
+server:
+  port: 8011
+---
+myAppSetting:
+  kafka:
+    producer:
+      klcN1:
+        topic-name: order-event-klc-n1-topic

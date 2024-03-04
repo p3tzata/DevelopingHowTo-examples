@@ -1,0 +1,42 @@
+
+debug: true
+---
+spring:
+  cloud:
+    openfeign:
+      oauth2:
+        clientRegistrationId: my-microservice-openfeign-regId
+        enabled: true
+      compression:
+        request:
+          enabled: true
+          mime-types: text/xml, application/xml, application/json
+          min-request-size: 2048
+        response:
+          enabled: true
+---
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          my-microservice-openfeign-regId:
+            authorization-grant-type: "client_credentials"
+            client-id: "my-microservice-openfeign"
+            client-secret: "LUxRZtb7Bpq4bu3gYHqNOb2DRJPlLwUT"
+        provider:
+          my-microservice-openfeign-regId:
+            token-uri: "http://localhost:${wiremock.server.port}/auth/realms/myRealm/protocol/openid-connect/token"
+---
+myFeign:
+  rest-servers:
+    spring-microservice-webserver:
+      url: "http://localhost:${wiremock.server.port}"
+---
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: "http://localhost:${wiremock.server.port}/auth/realms/myRealm"
+
