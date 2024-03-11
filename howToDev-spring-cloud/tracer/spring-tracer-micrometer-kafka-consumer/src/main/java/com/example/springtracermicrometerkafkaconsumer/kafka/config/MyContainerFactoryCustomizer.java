@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.hibernate.exception.JDBCConnectionException;
+import org.springframework.kafka.KafkaException.Level;
 import org.springframework.kafka.config.AbstractKafkaListenerContainerFactory;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.util.backoff.BackOff;
@@ -50,8 +51,10 @@ public class MyContainerFactoryCustomizer {
 
           handler.setBackOffFunction(this::getErrorHandlerBackOff);
 
+          //readMe: if you are flooded by retry error logs.
+          //handler.setLogLevel(Level.TRACE);
+
           //handler.addNotRetryableExceptions(IllegalArgumentException.class);
-          //handler.addRetryableExceptions();
 
           container.setCommonErrorHandler(handler);
 
@@ -60,7 +63,6 @@ public class MyContainerFactoryCustomizer {
   }
 
   private BackOff getErrorHandlerBackOff(ConsumerRecord<?, ?> record, Exception exception) {
-
 
     if (exception instanceof IllegalStateException) {
       log.error("IllegalStateException is present. Infinity retrying record: " + record.toString());
