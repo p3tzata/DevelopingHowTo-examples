@@ -1,0 +1,48 @@
+server:
+  port: 8013
+---
+spring:
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3007/spring_hibernate_jpa_cache?createDatabaseIfNotExist=true&serverTimezone=UTC&character_set_server=utf8mb4&useSSL=false&nullNamePatternMatchesAll=true&rewriteBatchedStatements=true"
+    username: "root"
+    password: ""
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    hikari:
+      connection-test-query: "SELECT 1"
+      minimum-idle: 2
+      maximum-pool-size: 100
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+---
+#readMe: configure hibernate for L2 caching
+spring:
+  jpa:
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true # Enable second level caching for hibernate
+          region:
+            factory_class: jcache
+          factory_class: org.hibernate.cache.jcache.JCacheRegionFactory # Specify framework second level caching.
+---
+#readMe: configure jpa for L2 caching
+spring:
+  jpa:
+    properties:
+     javax:
+      persistence:
+       sharedCache:
+            # ENABLE_SELECTIVE mode - only entities with @Cacheable annotation will use L2 cache.
+            mode: ENABLE_SELECTIVE
+---
+logging:
+ level:
+  org.hibernate.SQL: DEBUG
+  org.hibernate.orm.jdbc.bind: TRACE
+---
