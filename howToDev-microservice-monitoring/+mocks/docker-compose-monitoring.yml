@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  cu-oauth2-mysql-keycloak:
+    container_name: cu-oauth2-mysql-keycloak
+    image: mysql:8.0
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0 --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql-keycloak-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3006:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=auth_service
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=123456
+  cu-oauth2-keycloak:
+    container_name: cu-oauth2-keycloak
+    image: quay.io/keycloak/keycloak:18.0.0
+    restart: always
+    command: start-dev
+    ports:
+      - "8001:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: 123456
+      KC_HTTP_RELATIVE_PATH: auth
+      # KC_LOG_LEVEL: debug
+      KC_FEATURES:
+        authorization
+        token-exchange
+        docker
+        impersonation
+        scripts
+        web-authn
+        client-policies
+        dynamic-scopes
+      KC_DB: mysql
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: 123456
+      KC_DB_URL: jdbc:mysql://cu-oauth2-mysql-keycloak/auth_service
+    depends_on:
+      - cu-oauth2-mysql-keycloak

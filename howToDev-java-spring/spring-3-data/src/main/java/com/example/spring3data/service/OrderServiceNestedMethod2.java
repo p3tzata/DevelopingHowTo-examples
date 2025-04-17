@@ -5,6 +5,7 @@ import com.example.spring3data.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,20 +14,18 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 @Service
 @Slf4j
-public class OrderServiceNestedMethod {
+public class OrderServiceNestedMethod2 {
 
   OrderRepository orderRepository;
-  private OrderServiceNestedMethod2 orderServiceNestedMethod2;
 
   @PersistenceContext
   private EntityManager em;
 
   @Autowired
-  public OrderServiceNestedMethod(OrderRepository orderRepository, OrderServiceNestedMethod2 orderServiceNestedMethod2) {
+  public OrderServiceNestedMethod2(OrderRepository orderRepository) {
 
     this.orderRepository = orderRepository;
 
-    this.orderServiceNestedMethod2 = orderServiceNestedMethod2;
   }
 
   @Transactional
@@ -71,7 +70,6 @@ public class OrderServiceNestedMethod {
     try {
       OrderEntity orderEntity = OrderEntity.builder().orderCode("code1").id(2L).build();
       orderRepository.saveAndFlush(orderEntity);
-      int i = 5 / 0;
     }
     catch (Exception exception) {
       log.error("ERROR from method B1:{}", exception.getMessage());
@@ -83,6 +81,7 @@ public class OrderServiceNestedMethod {
   @Transactional
   public void methodC() {
 
+    MDC.getCopyOfContextMap();
     OrderEntity orderEntity = OrderEntity.builder().orderCode("code1").id(1L).build();
     orderRepository.save(orderEntity);
     methodD();
@@ -103,15 +102,6 @@ public class OrderServiceNestedMethod {
       log.error("ERROR from method D:{}", exception.getMessage());
     }
 
-  }
-
-  @Transactional(timeout = 900)
-  public void methodF() {
-
-    OrderEntity orderEntity = OrderEntity.builder().orderCode("code1").id(1L).build();
-    orderRepository.save(orderEntity);
-    orderServiceNestedMethod2.methodC();
-    log.info("End of method C");
   }
 
 

@@ -18,7 +18,8 @@ public class _TransactionalNestedMethodTest {
   @Autowired
   OrderServiceNestedMethod orderService;
 
-  public void tearDown () {
+  public void tearDown() {
+
     orderRepository.deleteAll();
   }
 
@@ -45,7 +46,8 @@ public class _TransactionalNestedMethodTest {
 
     try {
       orderService.methodA();
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
 
@@ -54,17 +56,48 @@ public class _TransactionalNestedMethodTest {
   }
 
   @Test
-  void givenTransactionMethodCCallMethodDWhichCatchAllException() {
+  void givenTransactionMethodA1CallMethodB1WhichCatchAllExceptionAndFlush()  {
 
     try {
-      orderService.methodC();
-    } catch (Exception e) {
+      orderService.methodA1();
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
 
     String debug = "debug";
 
   }
+
+
+  @Test
+  void givenTransactionMethodCCallMethodDWhichCatchAllException() {
+
+    try {
+      orderService.methodC();
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    String debug = "debug";
+
+  }
+
+  @Test
+  void givenTransactionMethodFCallMethodFromOtherService() {
+
+    try {
+      orderService.methodF();
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    String debug = "debug";
+
+  }
+
 
 
 }
