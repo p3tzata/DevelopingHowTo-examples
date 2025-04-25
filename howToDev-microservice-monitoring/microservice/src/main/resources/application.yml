@@ -1,6 +1,43 @@
+#hint: application.yml
 spring:
   application:
     name: microservice
 ---
 server:
-  port: 8090
+  port: 8008
+---
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*" # Expose all actuator endpoints, except excluded.
+        exclude: ["env"]
+
+---
+# Configure jmx to be enabled, if you want to use jmx tools like jconsole or visualvm.
+spring:
+  jmx:
+    enabled: true
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+
+---
+# Configure custom info properties in actuator info endpoint
+management:
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: ${spring.application.name}
+---
+# Configure liveness and readiness probes
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
