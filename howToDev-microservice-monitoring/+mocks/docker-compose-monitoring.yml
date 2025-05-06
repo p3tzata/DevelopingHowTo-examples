@@ -1,5 +1,6 @@
 version: '3.3'
 services:
+#Metrics monitoring stack
   howToDev-monitoring-prometheus:
     container_name: howToDev-monitoring-prometheus
     image: prom/prometheus
@@ -18,3 +19,34 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=123456
       - GF_SECURITY_ADMIN_USER=admin
 
+#ELK stack (logging stack)
+  howToDev-monitoring-logstash:
+    container_name: howToDev-monitoring-logstash
+    image: logstash:8.17.1
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - '5044:5044'
+      - '9600:9600'
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+  howToDev-monitoring-elasticsearch:
+    image: elasticsearch:8.17.1
+    container_name: howToDev-monitoring-elasticsearch
+    hostname: elasticsearch
+    environment:
+      - xpack.security.enabled=false  # Disable security for local development
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
+      - discovery.type=single-node
+      #- es.enforce.bootstrap.checks=true
+    ports:
+      - '9200:9200'
+  howToDev-monitoring-kibana:
+    image: kibana:8.17.1
+    container_name: howToDev-monitoring-kibana
+    ports:
+      - '5601:5601'
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - howToDev-monitoring-elasticsearch

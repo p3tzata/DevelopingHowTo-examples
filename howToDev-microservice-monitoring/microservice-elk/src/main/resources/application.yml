@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: microservice-elk
+
+---
+server:
+  port: 8009
+logging:
+  level:
+    net.logstash: DEBUG
