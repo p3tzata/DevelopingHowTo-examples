@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: microservice-zipkin-parent
+---
+server:
+  port: 8010
+  servlet:
+   context-path: /zipkin-parent
+---
+logging:
+  pattern:
+   level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+---
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # It means that all(100%) requests will be traced
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true # Allowing detailed analysis of request latencies and performance
+---

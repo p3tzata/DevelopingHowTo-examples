@@ -1,6 +1,6 @@
 # Depends:
     - `howToDev-microservice-monitoring/microservice-elk`
-    - elk mocks 
+    - mocks 
 
 # See
 ### Configuration

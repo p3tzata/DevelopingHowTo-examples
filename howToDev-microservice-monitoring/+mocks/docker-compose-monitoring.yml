@@ -50,3 +50,11 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     depends_on:
       - howToDev-monitoring-elasticsearch
+# Tracing
+  howToDev-monitoring-zipkin:
+    container_name: howToDev-monitoring-zipkin
+    image: openzipkin/zipkin
+    ports:
+      - '9411:9411'
+    environment:
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
