@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs += [
+        '-Dcom.sun.management.jmxremote',
+        '-Dcom.sun.management.jmxremote.port=9010',
+        '-Dcom.sun.management.jmxremote.rmi.port=9010',
+        '-Dcom.sun.management.jmxremote.authenticate=false',
+        '-Dcom.sun.management.jmxremote.ssl=false',
+        '-Djava.rmi.server.hostname=0.0.0.0'
+    ]
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'Jmx' // Replace with the fully qualified class name if needed
+        )
+    }
+}
