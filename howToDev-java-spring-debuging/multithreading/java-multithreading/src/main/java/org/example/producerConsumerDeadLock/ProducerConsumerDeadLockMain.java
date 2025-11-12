@@ -1,4 +1,5 @@
 package org.example.producerConsumerDeadLock;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,12 +14,13 @@ public class ProducerConsumerDeadLockMain {
 
     try {
       log.info("Start sleeping");
-      Thread.sleep(20000);
+      Thread.sleep(10000);
       log.info("End sleeping");
 
       new Producer("_Producer").start();
       new Consumer("_Consumer").start();
-    } catch (InterruptedException e) {
+    }
+    catch (InterruptedException e) {
       log.severe(e.getMessage());
     }
   }
