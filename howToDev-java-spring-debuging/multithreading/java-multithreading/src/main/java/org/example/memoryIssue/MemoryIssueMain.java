@@ -9,7 +9,7 @@ public class MemoryIssueMain {
   private static Logger log = Logger.getLogger(MemoryIssueMain.class.getName());
   public static List<MyClass> list = new ArrayList();
 
-  public static void main(String[] args) throws InterruptedException
+  public static void main(String[] args) throws InterruptedException {
 
     try {
       log.info("Start memory issue simulation");
