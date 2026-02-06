@@ -1,0 +1,6 @@
+GET http://localhost:8010/api
+
+###
+
+GET http://localhost:8010/api/allProduct;
+
